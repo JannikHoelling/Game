@@ -49,7 +49,7 @@ public class Game {
     public void start(){
         
         entities.add(new Player(0, 0));
-        obstacle = new TestObstacle(256, 0, 10 , 256);
+        obstacle = new TestObstacle(256, 0, 25 , 256);
         entities.add(obstacle);
         
         frame.setVisible(true);
