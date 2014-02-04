@@ -21,7 +21,7 @@ public class Game {
         
     Input input = new Input();
     
-    public static ArrayList<Entity> entities = new ArrayList<>(); 
+    public static ArrayList<Entity> entities = new ArrayList<>();
     
     public static TestObstacle obstacle;
     
