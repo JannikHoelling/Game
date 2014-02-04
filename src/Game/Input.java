@@ -30,6 +30,8 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
         keys[ke.getKeyCode()] = false;
     }
 
+    // TODO: Not moving mouse while moving player targets old position
+    
     @Override
     public void mouseDragged(MouseEvent me) {
         mouseX = me.getX() - Game.getWidth()/2 + Camera.x;
