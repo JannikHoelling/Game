@@ -5,8 +5,6 @@
  */
 package Game.Entity;
 
-import Game.Camera;
-import Game.Game;
 import Game.Renderer;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;

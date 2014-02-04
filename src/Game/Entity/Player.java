@@ -28,18 +28,20 @@ public class Player extends Entity {
 
     @Override
     public void update(double delta) {
-        if (Input.keys[KeyEvent.VK_A]) {
+
+        if (Input.keys[KeyEvent.VK_A] && !Game.obstacle.getBounds().contains(x - delta * speed, y)) {
             x -= delta * speed;
         }
-        if (Input.keys[KeyEvent.VK_D]) {
+        if (Input.keys[KeyEvent.VK_D] && !Game.obstacle.getBounds().contains(x + delta * speed, y)) {
             x += delta * speed;
         }
-        if (Input.keys[KeyEvent.VK_W]) {
+        if (Input.keys[KeyEvent.VK_W] && !Game.obstacle.getBounds().contains(x, y - delta * speed)) {
             y -= delta * speed;
         }
-        if (Input.keys[KeyEvent.VK_S]) {
+        if (Input.keys[KeyEvent.VK_S] && !Game.obstacle.getBounds().contains(x, y + delta * speed)) {
             y += delta * speed;
         }
+        
         if (Input.mouseClicked) {
             
             SpawnTools.spawnProjectile(x, y, Input.mouseX, Input.mouseY, 500f);
