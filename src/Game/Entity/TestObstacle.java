@@ -29,6 +29,7 @@ public class TestObstacle extends Entity {
         g.drawRect((int) x + Renderer.offsetX(), (int) y + Renderer.offsetY(), sizeX, sizeY);
     }
     
+    //gibt einen rectangle wieder
     public Rectangle getBounds() {
         return new Rectangle((int)x, (int)y, sizeX, sizeY);
     }

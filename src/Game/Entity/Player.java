@@ -46,7 +46,7 @@ public class Player extends Entity {
             
             SpawnTools.spawnProjectile(x, y, Input.mouseX, Input.mouseY, 500f);
         }
-        if (Input.keys[KeyEvent.VK_NUMPAD0]) {
+        if (Input.keys[KeyEvent.VK_ALT]) {
             
             SpawnTools.spawnExplosion(Input.mouseX, Input.mouseY, 250f);
         }
