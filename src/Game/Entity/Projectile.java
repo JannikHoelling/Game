@@ -29,15 +29,13 @@ public class Projectile extends Entity {
 
     @Override
     public void update(double delta) {
-        x += dX * delta;
-        y += dY * delta;
         
-        if(Game.obstacle.getBounds().contains(x, y)) {
+        if(Game.obstacle.getBounds().contains(x + dX * delta, y +  dY * delta) || Game.time - creationTime > 10) {
             delete = true;
         }
-        
-        if (Game.time - creationTime > 10) {
-            delete = true;
+        else {
+            x += dX * delta;
+            y += dY * delta;
         }
     }
 }
