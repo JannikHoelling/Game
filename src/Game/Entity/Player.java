@@ -44,11 +44,11 @@ public class Player extends Entity {
         
         if (Input.mouseClicked) {
             
-            SpawnTools.spawnProjectile(x, y, Input.mouseX, Input.mouseY, 500f);
+            SpawnTools.spawnProjectile(x, y, Input.getMouseX(), Input.getMouseY(), 500f);
         }
         if (Input.keys[KeyEvent.VK_NUMPAD0]) {
             
-            SpawnTools.spawnExplosion(Input.mouseX, Input.mouseY, 250f);
+            SpawnTools.spawnExplosion(Input.getMouseX(), Input.getMouseY(), 250f);
         }
         
         Camera.x = (int) x;

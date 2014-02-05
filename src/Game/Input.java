@@ -29,19 +29,17 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
     public void keyReleased(KeyEvent ke) {
         keys[ke.getKeyCode()] = false;
     }
-
-    // TODO: Not moving mouse while moving player targets old position
     
     @Override
     public void mouseDragged(MouseEvent me) {
-        mouseX = me.getX() - Game.getWidth()/2 + Camera.x;
-        mouseY = me.getY() - Game.getHeight()/2 + Camera.y;
+        mouseX = me.getX();
+        mouseY = me.getY();
     }
 
     @Override
     public void mouseMoved(MouseEvent me) {
-        mouseX = me.getX() - Game.getWidth()/2 + Camera.x;
-        mouseY = me.getY() - Game.getHeight()/2 + Camera.y;
+        mouseX = me.getX();
+        mouseY = me.getY();
     }
 
     @Override
@@ -62,4 +60,12 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
 
     @Override
     public void mouseExited(MouseEvent me) {}
+    
+    public static int getMouseX() {
+        return mouseX - Game.getWidth()/2 + Camera.x;
+    }
+    
+    public static int getMouseY() {
+        return mouseY - Game.getHeight()/2 + Camera.y;
+    }
 }

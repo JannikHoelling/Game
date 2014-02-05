@@ -22,7 +22,7 @@ public class GamePanel extends JPanel {
         g.drawString("Entities: " + Game.entities.size(), 0, 10);
         g.drawString("Camera: " + Camera.x + "|" + Camera.y, 0, 25);
         
-        g.drawOval(Input.mouseX + Renderer.offsetX() - 10, Input.mouseY + Renderer.offsetY() - 10, 20, 20);
+        g.drawOval(Input.getMouseX() + Renderer.offsetX() - 10, Input.getMouseY() + Renderer.offsetY() - 10, 20, 20);
 
         for (int i = 0; i < entities.size(); i++) {
             entities.get(i).render(g);
