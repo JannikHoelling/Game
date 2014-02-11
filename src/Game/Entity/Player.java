@@ -43,6 +43,10 @@ public class Player extends Entity {
             y += delta * speed;
         }
         
+        /*if (Terrain.getBlock(x, (float) (y + delta * speed/2))) {
+            y += delta * speed/2;
+        }*/
+        
 //        if (Input.keys[KeyEvent.VK_A]) {
 //            x -= delta * speed;
 //        }

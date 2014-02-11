@@ -65,7 +65,8 @@ public class Game {
             
             update(delta);
             
-            frame.repaint();
+            //frame.repaint();
+            frame.panel.paintImmediately(0,0,PANEL_X ,PANEL_Y);
             
             try {
                 int sleepTime = (int)(lastLoopTime - System.nanoTime() + OPTIMAL_TIME)/1000000;

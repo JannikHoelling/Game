@@ -5,6 +5,7 @@ import java.awt.event.ComponentListener;
 import javax.swing.*;
 
 import static Game.World.*;
+import java.awt.Graphics2D;
 
 /**
  *
