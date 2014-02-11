@@ -69,7 +69,6 @@ public class Terrain {
                 return false;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Array out of Bounds!  (" + xPosition + "|" + yPosition + ")");
             return false;
         }
     }
