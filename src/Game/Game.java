@@ -1,32 +1,31 @@
 package Game;
 
+import Game.Map.Terrain;
 import Game.Entity.Player;
 import Game.Entity.Entity;
-import Game.Entity.TestObstacle;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static Game.World.*;
 
 /**
  *
  * @author Jannik
  */
 public class Game {    
-    public static final int TARGET_FPS = 60;
-    public static final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;
     
     public static GameFrame frame;
     
     public static double time;
         
     Input input = new Input();
+    public static Terrain terrain;
     
     public static ArrayList<Entity> entities = new ArrayList<>();
     
-    public static TestObstacle obstacle;
-    
     public Game() {
-        frame = new GameFrame(1280, 720);
+        frame = new GameFrame(PANEL_X, PANEL_Y);
         
         frame.panel.addKeyListener(input);
         frame.panel.addMouseMotionListener(input);
@@ -47,10 +46,8 @@ public class Game {
     }
     
     public void start(){
-        
+        terrain = new Terrain();
         entities.add(new Player(0, 0));
-        obstacle = new TestObstacle(256, 0, 25 , 256);
-        entities.add(obstacle);
         
         frame.setVisible(true);
         
@@ -78,13 +75,5 @@ public class Game {
                 Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }
-    
-    public static int getWidth() {
-        return frame.panel.getWidth();
-    }
-    
-    public static int getHeight() {
-        return frame.panel.getHeight();
     }
 }

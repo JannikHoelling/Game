@@ -1,12 +1,13 @@
 package Game.Entity;
 
+import Game.Map.Terrain;
 import Game.*;
 import java.awt.Graphics2D;
 
 /**
- *
- * @author Lokaler Benutzer
- */
+*
+* @author Lokaler Benutzer
+*/
 public class Projectile extends Entity {
 
     public float dX, dY;
@@ -28,16 +29,16 @@ public class Projectile extends Entity {
     }
 
     @Override
-    public void update(double delta) {
-        x += dX * delta;
-        y += dY * delta;
+    public void update(double deltaD) {
         
-        if(Game.obstacle.getBounds().contains(x, y)) {
+        float delta = (float) deltaD;
+        
+        if(Game.time - creationTime > 10 || !Terrain.getBlock(x + dX * delta, y + dY * delta)) {
             delete = true;
         }
-        
-        if (Game.time - creationTime > 10) {
-            delete = true;
+        else {
+            x += dX * delta;
+            y += dY * delta;
         }
     }
 }

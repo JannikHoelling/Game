@@ -33,7 +33,7 @@ public class SpawnTools {
         
         Random rand = new Random();
         
-        int shots = 180;
+        int shots = 128;
         // Convert the degrees to Radians
         float degree = 360f / shots;
         float radian = (float) ((Math.PI/180.0) * degree);

@@ -13,10 +13,10 @@ package Game;
 public class Renderer {
     
     public static int offsetX() {
-        return - Camera.x + Game.getWidth()/2;
+        return - Camera.x + World.PANEL_X/2;
     }
     
     public static int offsetY() {
-        return - Camera.y + Game.getHeight()/2;
+        return - Camera.y + World.PANEL_Y/2;
     }
 }

@@ -7,9 +7,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 /**
- *
- * @author Lokaler Benutzer
- */
+*
+* @author Lokaler Benutzer
+*/
 public class Input implements KeyListener, MouseMotionListener, MouseListener {
 
     public static boolean[] keys = new boolean[KeyEvent.KEY_LAST];
@@ -29,17 +29,17 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
     public void keyReleased(KeyEvent ke) {
         keys[ke.getKeyCode()] = false;
     }
-
+    
     @Override
     public void mouseDragged(MouseEvent me) {
-        mouseX = me.getX() - Game.getWidth()/2 + Camera.x;
-        mouseY = me.getY() - Game.getHeight()/2 + Camera.y;
+        mouseX = me.getX();
+        mouseY = me.getY();
     }
 
     @Override
     public void mouseMoved(MouseEvent me) {
-        mouseX = me.getX() - Game.getWidth()/2 + Camera.x;
-        mouseY = me.getY() - Game.getHeight()/2 + Camera.y;
+        mouseX = me.getX();
+        mouseY = me.getY();
     }
 
     @Override
@@ -60,4 +60,12 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
 
     @Override
     public void mouseExited(MouseEvent me) {}
+    
+    public static int getMouseX() {
+        return mouseX - World.PANEL_X/2 + Camera.x;
+    }
+    
+    public static int getMouseY() {
+        return mouseY - World.PANEL_Y/2 + Camera.y;
+    }
 }

@@ -6,6 +6,7 @@
 package Game.Entity;
 
 import Game.*;
+import Game.Map.Terrain;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
@@ -23,39 +24,48 @@ public class Player extends Entity {
     
     @Override
     public void render(Graphics2D g) {
-        g.fillOval( Game.getWidth()/2 - 5, Game.getHeight()/2 - 5, 10, 10);
+        g.fillOval( World.PANEL_X/2 - 5, World.PANEL_Y/2 - 5, 10, 10);
     }
 
     @Override
     public void update(double delta) {
-
-        if (Input.keys[KeyEvent.VK_A] && !Game.obstacle.getBounds().contains(x - delta * speed, y)) {
+        
+        if (Input.keys[KeyEvent.VK_A] && Terrain.getBlock((float) (x - delta * speed), y)) {
             x -= delta * speed;
         }
-        if (Input.keys[KeyEvent.VK_D] && !Game.obstacle.getBounds().contains(x + delta * speed, y)) {
+        if (Input.keys[KeyEvent.VK_D] && Terrain.getBlock((float) (x + delta * speed), y)) {
             x += delta * speed;
         }
-        if (Input.keys[KeyEvent.VK_W] && !Game.obstacle.getBounds().contains(x, y - delta * speed)) {
+        if (Input.keys[KeyEvent.VK_W] && Terrain.getBlock(x, (float) (y - delta * speed))) {
             y -= delta * speed;
         }
-        if (Input.keys[KeyEvent.VK_S] && !Game.obstacle.getBounds().contains(x, y + delta * speed)) {
+        if (Input.keys[KeyEvent.VK_S] && Terrain.getBlock(x, (float) (y + delta * speed))) {
             y += delta * speed;
         }
         
+//        if (Input.keys[KeyEvent.VK_A]) {
+//            x -= delta * speed;
+//        }
+//        if (Input.keys[KeyEvent.VK_D]) {
+//            x += delta * speed;
+//        }
+//        if (Input.keys[KeyEvent.VK_W]) {
+//            y -= delta * speed;
+//        }
+//        if (Input.keys[KeyEvent.VK_S]) {
+//            y += delta * speed;
+//        }
+        
         if (Input.mouseClicked) {
             
-            SpawnTools.spawnProjectile(x, y, Input.mouseX, Input.mouseY, 500f);
+            SpawnTools.spawnProjectile(x, y, Input.getMouseX(), Input.getMouseY(), 500f);
         }
         if (Input.keys[KeyEvent.VK_ALT]) {
             
-            SpawnTools.spawnExplosion(Input.mouseX, Input.mouseY, 250f);
+            SpawnTools.spawnExplosion(Input.getMouseX(), Input.getMouseY(), 250f);
         }
         
         Camera.x = (int) x;
         Camera.y = (int) y;
-        
-        /*if(y < 500) {
-            y += 2.5f;
-        }*/
     }
 }
