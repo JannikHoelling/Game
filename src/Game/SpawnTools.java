@@ -1,18 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Game;
 
 import Game.Entity.Projectile;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-/**
- *
- * @author Jannik
- */
+
 public class SpawnTools {
     
     /**
@@ -23,6 +16,7 @@ public class SpawnTools {
      * @param yTo y Position of the target
      * @param force speed with that the projectile is spawned in pixel/sec
      */
+    
     public static void spawnProjectile(float xFrom, float yFrom, float xTo, float yTo, float force) {
         // Direction
         float dX = xTo - xFrom;
@@ -33,7 +27,7 @@ public class SpawnTools {
 
         dX /= length;
         dY /= length;
-
+        
         Game.entities.add(new Projectile(xFrom, yFrom, dX * force, dY * force));
     }
     
@@ -43,6 +37,7 @@ public class SpawnTools {
      * @param yFrom x Spawnposition of the explosion
      * @param force speed with that the projectiles are spawned in pixel/sec
      */
+    
     public static void spawnExplosion(float xFrom, float yFrom, float force) {
         
         Random rand = new Random();

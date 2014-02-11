@@ -1,18 +1,14 @@
 package Game;
 
-/**
- *
- * @author Jannik
- */
+
 public class Main {
 
     /**
-     * @param args the command line arguments
+     * @version Alpha_1.0
+     * @param args
      */
     public static void main(String[] args) {
-
         Game game = new Game();
-
         game.start();
     }
 }

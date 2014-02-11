@@ -1,12 +1,8 @@
 package Game.Entity;
 
-import Game.Camera;
 import java.awt.Graphics2D;
 
-/**
- *
- * @author Jannik
- */
+
 public class Entity {
 
     public float x;

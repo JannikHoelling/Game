@@ -4,16 +4,13 @@ import Game.Map.Terrain;
 import Game.*;
 import java.awt.Graphics2D;
 
-/**
-*
-* @author Lokaler Benutzer
-*/
+
 public class Projectile extends Entity {
 
     public float dX, dY;
 
     public double creationTime;
-
+    
     public Projectile(float x, float y, float dX, float dY) {
         super(x, y);
 

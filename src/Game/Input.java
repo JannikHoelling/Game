@@ -6,10 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-/**
-*
-* @author Lokaler Benutzer
-*/
+
 public class Input implements KeyListener, MouseMotionListener, MouseListener {
 
     public static boolean[] keys = new boolean[KeyEvent.KEY_LAST];

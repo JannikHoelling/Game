@@ -6,10 +6,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
-/**
- *
- * @author Jannik
- */
+import static Game.World.*;
+
+
 public class GamePanel extends JPanel {
 
     public GamePanel() {
@@ -21,7 +20,7 @@ public class GamePanel extends JPanel {
         Graphics2D g = (Graphics2D) gOld;
         
         g.setColor(new Color(0, 170, 255));
-        g.fillRect(0, 0, World.PANEL_X, World.PANEL_Y);
+        g.fillRect(0, 0, PANEL_X, PANEL_Y);
         g.setColor(Color.BLACK);
 
         g.drawString("Entities: " + Game.entities.size(), 0, 10);

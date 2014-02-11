@@ -9,10 +9,7 @@ import java.util.logging.Logger;
 
 import static Game.World.*;
 
-/**
- *
- * @author Jannik
- */
+
 public class Game {    
     
     public static GameFrame frame;

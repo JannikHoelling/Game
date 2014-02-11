@@ -5,12 +5,8 @@ import java.awt.event.ComponentListener;
 import javax.swing.*;
 
 import static Game.World.*;
-import java.awt.Graphics2D;
 
-/**
- *
- * @author Jannik
- */
+
 public class GameFrame extends JFrame {
 
     public GamePanel panel = new GamePanel();

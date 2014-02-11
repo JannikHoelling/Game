@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Game.Map;
 
 import java.awt.image.BufferedImage;
@@ -12,13 +7,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
-/**
- *
- * @author Jannik
- */
+
 public enum BlockType {
 
-    AIR("res/air.png"), DIRT("res/dirt.png");
+    AIR("res/air.png"), DIRT("res/dirt.png"), DIRT_FULL("res/dirt_full.png"), GRASS("res/grass.png");
 
     public final String location;
 
