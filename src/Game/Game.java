@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import static Game.World.*;
 
 
-public class Game {    
+public class Game {
     
     public static GameFrame frame;
     
@@ -33,7 +33,7 @@ public class Game {
         // Loop through all entities, update them or remove them if they are marked to be deleted
         for (int i = 0; i < entities.size(); i++) {
             if(!entities.get(i).delete) {
-                entities.get(i).update(delta);
+                entities.get(i).update((float) delta);
             }
             else {
                 entities.remove(i);

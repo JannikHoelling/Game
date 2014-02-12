@@ -10,6 +10,7 @@ public final class World {
     public static int PANEL_Y = 720;
     
     public static final int TILE_SIZE = 32;
+    public static final int HALF_TILE = TILE_SIZE/2;
     public static final int WORLD_X = 64;
     public static final int WORLD_Y = 64;
 }

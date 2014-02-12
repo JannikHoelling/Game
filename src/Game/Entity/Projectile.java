@@ -22,13 +22,12 @@ public class Projectile extends Entity {
 
     @Override
     public void render(Graphics2D g) {
-        g.fillRect((int) x + Renderer.offsetX(), (int) y + Renderer.offsetY(), 4, 4);
+        //g.fillRect((int) x + Renderer.offsetX(), (int) y + Renderer.offsetY(), 4, 4);
+        g.fillOval((int) x + Renderer.offsetX() - 2, (int) y + Renderer.offsetY() - 2, 4, 4);
     }
 
     @Override
-    public void update(double deltaD) {
-        
-        float delta = (float) deltaD;
+    public void update(float delta) {
         
         if(Game.time - creationTime > 10 || !Terrain.getBlock(x + dX * delta, y + dY * delta)) {
             delete = true;

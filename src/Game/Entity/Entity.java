@@ -15,7 +15,7 @@ public class Entity {
         this.y = y;
     }
 
-    public void update(double delta) {
+    public void update(float delta) {
 
     }
 
