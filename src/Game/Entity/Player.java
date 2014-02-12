@@ -85,7 +85,7 @@ public class Player extends Entity {
         
         // Slowing down when touching the ground
         if(!Input.keys[KeyEvent.VK_A] && !Input.keys[KeyEvent.VK_D] && (!Terrain.getBlock(x + HALF_TILE-1, y + HALF_TILE) || !Terrain.getBlock(x - HALF_TILE, y + HALF_TILE))) {
-            dX *= 0.85;
+            dX *= 0.8;
         }
         
         //Horizontal movement
@@ -107,7 +107,7 @@ public class Player extends Entity {
         //Vertical movement
         y += delta * dY;
         
-        if(dY < 0) { // Check Floor
+        if(dY < 0) { // Check floor
             if (!Terrain.getBlock(x + HALF_TILE-1, y - HALF_TILE) || !Terrain.getBlock(x - HALF_TILE, y - HALF_TILE)) {
                 y = magic(y) + HALF_TILE;
                 dY = 0;

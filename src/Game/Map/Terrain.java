@@ -20,7 +20,7 @@ public class Terrain {
 
         for (int x = 0; x < WORLD_X; x++) {
             for (int y = 0; y < WORLD_Y; y++) {
-                if (rand.nextFloat() < 0.1f || x == 0 || y == 0 || x == WORLD_X-1 || y == WORLD_Y-1) {
+                if (rand.nextFloat() < 0.05f || x == 0 || y == 0 || x == WORLD_X-1 || y == WORLD_Y-1) {
                     terrain[x][y] = new Block();
                     terrain[x][y].blockType = BlockType.DIRT;
                 } else {
