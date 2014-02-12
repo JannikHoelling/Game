@@ -21,6 +21,8 @@ public class Game {
     
     public static ArrayList<Entity> entities = new ArrayList<>();
     
+    public static float timePerFrame = 0.0f;
+    
     public Game() {
         frame = new GameFrame(PANEL_X, PANEL_Y);
         
@@ -64,6 +66,8 @@ public class Game {
             
             //frame.repaint();
             frame.panel.paintImmediately(0,0,PANEL_X ,PANEL_Y);
+            
+            timePerFrame = ((float)(System.nanoTime() - lastLoopTime) / 1000000);
             
             try {
                 int sleepTime = (int)(lastLoopTime - System.nanoTime() + OPTIMAL_TIME)/1000000;

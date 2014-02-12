@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 public class Player extends Entity {
 
     public float speed = 250f;
+    public float fallSpeed;
 
     BufferedImage image;
 
@@ -52,18 +53,39 @@ public class Player extends Entity {
                 x = magic(x) - HALF_TILE;
             }
         }
-        if (Input.keys[KeyEvent.VK_W] && !Input.keys[KeyEvent.VK_S]) {
+        /*if (Input.keys[KeyEvent.VK_W] && !Input.keys[KeyEvent.VK_S]) {
             y -= delta * speed;
+            fallSpeed = 0;
             if (!Terrain.getBlock(x + HALF_TILE-1, y - HALF_TILE) || !Terrain.getBlock(x - HALF_TILE, y - HALF_TILE)) {
                 y = magic(y) + HALF_TILE;
             }
         }
-        if (Input.keys[KeyEvent.VK_S] && !Input.keys[KeyEvent.VK_W]) {
+        /*if (Input.keys[KeyEvent.VK_S] && !Input.keys[KeyEvent.VK_W]) {
             y += delta * speed;
             if (!Terrain.getBlock(x + HALF_TILE-1, y + HALF_TILE) || !Terrain.getBlock(x - HALF_TILE, y + HALF_TILE)) {
                 y = magic(y) - HALF_TILE;
             }
+        }*/
+        
+        
+        if (!Input.keys[KeyEvent.VK_W]) {
+            y += delta * fallSpeed;
+            if (!Terrain.getBlock(x + HALF_TILE-1, y + HALF_TILE) || !Terrain.getBlock(x - HALF_TILE, y + HALF_TILE)) {
+                y = magic(y) - HALF_TILE;
+                fallSpeed = 0;
+            }
         }
+        
+        if (!Terrain.getBlock(x + HALF_TILE-1, y - HALF_TILE) || !Terrain.getBlock(x - HALF_TILE, y - HALF_TILE)) {
+            y = magic(y) + HALF_TILE;
+            fallSpeed = 0;
+        }
+        
+        if(Input.keys[KeyEvent.VK_SPACE]) {
+            fallSpeed = -500;
+        }
+        
+        fallSpeed += delta * 981f;
 
         if (Input.mouseClicked) {
             SpawnTools.spawnProjectile(x, y, Input.getMouseX(), Input.getMouseY(), 500f);
