@@ -16,7 +16,9 @@ import javax.imageio.ImageIO;
 public class Player extends Entity {
 
     public float speed = 250f;
-    public float fallSpeed;
+    
+    public float dX;
+    public float dY;
 
     BufferedImage image;
 
@@ -41,8 +43,8 @@ public class Player extends Entity {
     @Override
     public void update(float delta) {
         
-        if (Input.keys[KeyEvent.VK_A] && !Input.keys[KeyEvent.VK_D]) {
-            x -= delta * speed;
+        /*if (Input.keys[KeyEvent.VK_A] && !Input.keys[KeyEvent.VK_D]) {
+           x -= delta * speed;
             if (!Terrain.getBlock(x - HALF_TILE, y - HALF_TILE) || !Terrain.getBlock(x - HALF_TILE, y + HALF_TILE-1)) {
                 x = magic(x) + HALF_TILE;
             }
@@ -55,7 +57,6 @@ public class Player extends Entity {
         }
         /*if (Input.keys[KeyEvent.VK_W] && !Input.keys[KeyEvent.VK_S]) {
             y -= delta * speed;
-            fallSpeed = 0;
             if (!Terrain.getBlock(x + HALF_TILE-1, y - HALF_TILE) || !Terrain.getBlock(x - HALF_TILE, y - HALF_TILE)) {
                 y = magic(y) + HALF_TILE;
             }
@@ -67,25 +68,57 @@ public class Player extends Entity {
             }
         }*/
         
-        
-        if (!Input.keys[KeyEvent.VK_W]) {
-            y += delta * fallSpeed;
-            if (!Terrain.getBlock(x + HALF_TILE-1, y + HALF_TILE) || !Terrain.getBlock(x - HALF_TILE, y + HALF_TILE)) {
-                y = magic(y) - HALF_TILE;
-                fallSpeed = 0;
-            }
+        if(Input.keys[KeyEvent.VK_A]){
+            dX -= 10f;
         }
-        
-        if (!Terrain.getBlock(x + HALF_TILE-1, y - HALF_TILE) || !Terrain.getBlock(x - HALF_TILE, y - HALF_TILE)) {
-            y = magic(y) + HALF_TILE;
-            fallSpeed = 0;
+
+        if(Input.keys[KeyEvent.VK_D]){
+            dX += 10f;
         }
         
         if(Input.keys[KeyEvent.VK_SPACE]) {
-            fallSpeed = -500;
+            dY = -500;
         }
         
-        fallSpeed += delta * 981f;
+        // Adding fall speed
+        dY += delta * 981f;
+        
+        // Slowing down when touching the ground
+        if(!Input.keys[KeyEvent.VK_A] && !Input.keys[KeyEvent.VK_D] && (!Terrain.getBlock(x + HALF_TILE-1, y + HALF_TILE) || !Terrain.getBlock(x - HALF_TILE, y + HALF_TILE))) {
+            dX *= 0.85;
+        }
+        
+        //Horizontal movement
+        x += delta * dX;
+        
+        if(dX < 0) { // Check left side
+            if (!Terrain.getBlock(x - HALF_TILE, y - HALF_TILE) || !Terrain.getBlock(x - HALF_TILE, y + HALF_TILE-1)) {
+                x = magic(x) + HALF_TILE;
+                dX = 0;
+            }
+        }
+        if(dX > 0){ // Check right side
+            if (!Terrain.getBlock(x + HALF_TILE, y - HALF_TILE) || !Terrain.getBlock(x + HALF_TILE, y + HALF_TILE-1)) {
+                x = magic(x) - HALF_TILE;
+                dX = 0;
+            }
+        }
+        
+        //Vertical movement
+        y += delta * dY;
+        
+        if(dY < 0) { // Check Floor
+            if (!Terrain.getBlock(x + HALF_TILE-1, y - HALF_TILE) || !Terrain.getBlock(x - HALF_TILE, y - HALF_TILE)) {
+                y = magic(y) + HALF_TILE;
+                dY = 0;
+            }
+        }
+        if(dY > 0) { // Check ceiling
+            if (!Terrain.getBlock(x + HALF_TILE-1, y + HALF_TILE) || !Terrain.getBlock(x - HALF_TILE, y + HALF_TILE)) {
+                y = magic(y) - HALF_TILE;
+                dY = 0;
+            }
+        }
 
         if (Input.mouseClicked) {
             SpawnTools.spawnProjectile(x, y, Input.getMouseX(), Input.getMouseY(), 500f);
