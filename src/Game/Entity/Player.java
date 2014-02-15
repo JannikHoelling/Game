@@ -38,6 +38,8 @@ public class Player extends Entity {
         g.drawImage(image, PANEL_X / 2 - HALF_TILE, PANEL_Y / 2 - HALF_TILE, TILE_SIZE, TILE_SIZE, null);
 
         g.drawRect(PANEL_X / 2 - HALF_TILE, PANEL_Y / 2 - HALF_TILE, TILE_SIZE-1, TILE_SIZE-1);
+        
+        System.out.println("x " +x+ "y " +y);
     }
 
     @Override
@@ -134,5 +136,21 @@ public class Player extends Entity {
 
     public int magic(float value) {       
         return ((int) Math.ceil((value - HALF_TILE) / TILE_SIZE)) * TILE_SIZE;
+    }
+    
+    public float getX() {
+        return x;
+    }
+    
+    public float getY() {
+        return y;
+    }
+    
+    public void setX(float x) {
+        this.x = x;
+    }
+    
+    public void setY(float y) {
+        this.y = y;
     }
 }

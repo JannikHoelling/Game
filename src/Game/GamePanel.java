@@ -4,11 +4,11 @@ import static Game.Game.entities;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import javax.swing.JPanel;
-
+        
 import static Game.World.*;
 import java.awt.Font;
 import java.awt.RenderingHints;
+import javax.swing.JPanel;
 
 public class GamePanel extends JPanel {
 

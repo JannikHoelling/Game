@@ -3,6 +3,7 @@ package Game;
 import Game.Map.Terrain;
 import Game.Entity.Player;
 import Game.Entity.Entity;
+import Game.File.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,9 +24,15 @@ public class Game {
     
     public static float timePerFrame = 0.0f;
     
+    CreateFile cf = new CreateFile();
+    WriteFile wf = new WriteFile();
+    ReadFile rf = new ReadFile();
+    
+    public static Player player;
+
     public Game() {
         frame = new GameFrame(PANEL_X, PANEL_Y);
-        
+
         frame.panel.addKeyListener(input);
         frame.panel.addMouseMotionListener(input);
         frame.panel.addMouseListener(input);
@@ -46,7 +53,9 @@ public class Game {
     
     public void start(){
         terrain = new Terrain();
-        entities.add(new Player(0, 0));
+        
+        player = new Player(0, 0);
+        entities.add(player);
         
         frame.setVisible(true);
         
@@ -63,6 +72,10 @@ public class Game {
             double delta = (updateLength / ((double)OPTIMAL_TIME))/TARGET_FPS;
             
             update(delta);
+            
+            cf.update();
+            rf.update();
+            wf.update();
             
             //frame.repaint();
             frame.panel.paintImmediately(0,0,PANEL_X ,PANEL_Y);
