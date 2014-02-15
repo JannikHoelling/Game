@@ -36,7 +36,6 @@ public class ReadFile {
     }
 
     private void readFile() {
-        int a =0;
         while (sc.hasNext()) {
             float x = sc.nextFloat();
             float y = sc.nextFloat();
@@ -47,9 +46,11 @@ public class ReadFile {
             } else {
                 Game.player.setX(x);
                 Game.player.setY(y);
+                
             }
             
         }
+        Game.lastLoopTime = System.nanoTime();
         
     }
 

@@ -39,7 +39,6 @@ public class Player extends Entity {
 
         g.drawRect(PANEL_X / 2 - HALF_TILE, PANEL_Y / 2 - HALF_TILE, TILE_SIZE-1, TILE_SIZE-1);
         
-        System.out.println("x " +x+ "y " +y);
     }
 
     @Override

@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.util.Formatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class CreateFile {
 
@@ -26,6 +27,8 @@ public class CreateFile {
     }
 
     public void create() {
+        
+        JOptionPane.showMessageDialog(null, this);
         file = new File(FILE);
         
         try {

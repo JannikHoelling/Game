@@ -29,6 +29,7 @@ public class Game {
     ReadFile rf = new ReadFile();
     
     public static Player player;
+    public static long lastLoopTime;
 
     public Game() {
         frame = new GameFrame(PANEL_X, PANEL_Y);
