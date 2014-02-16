@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 
 public enum BlockType {
 
-    AIR("res/air.png"), DIRT("res/dirt.png"), DIRT_FULL("res/dirt_full.png"), GRASS("res/grass.png");
+    AIR("res\\air.png"), DIRT("res\\dirt.png"), DIRT_FULL("res\\dirt_full.png"), GRASS("res\\grass.png");
 
     public final String location;
 

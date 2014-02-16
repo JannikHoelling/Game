@@ -152,4 +152,20 @@ public class Player extends Entity {
     public void setY(float y) {
         this.y = y;
     }
+    
+    public float getDX() {
+        return dX;
+    }
+    
+    public float getDY() {
+        return dY;
+    }
+    
+    public void setDX(float dX) {
+        this.dX = dX;
+    }
+    
+    public void setDY(float dY) {
+        this.dY = dY;
+    }
 }

@@ -1,5 +1,7 @@
 package Game;
 
+import Game.Editor.EditorFrame;
+import Game.Editor.FileHandler;
 import Game.Map.Terrain;
 import Game.Entity.Player;
 import Game.Entity.Entity;
@@ -14,6 +16,7 @@ import static Game.World.*;
 public class Game {
     
     public static GameFrame frame;
+    public static EditorFrame edFrame;
     
     public static double time;
         
@@ -24,16 +27,16 @@ public class Game {
     
     public static float timePerFrame = 0.0f;
     
-    CreateFile cf = new CreateFile();
-    WriteFile wf = new WriteFile();
-    ReadFile rf = new ReadFile();
+    public static FileHandler fileHandler;
     
     public static Player player;
     public static long lastLoopTime;
 
     public Game() {
         frame = new GameFrame(PANEL_X, PANEL_Y);
-
+        edFrame = new EditorFrame(PANEL_X, PANEL_Y);
+        fileHandler = new FileHandler();
+        
         frame.panel.addKeyListener(input);
         frame.panel.addMouseMotionListener(input);
         frame.panel.addMouseListener(input);
@@ -60,7 +63,9 @@ public class Game {
         
         frame.setVisible(true);
         
-        long lastLoopTime = System.nanoTime();
+        fileHandler.createFolder();
+        
+        lastLoopTime = System.nanoTime();
         
         // keep looping round til the game ends
         while (true) {
@@ -72,11 +77,9 @@ public class Game {
             lastLoopTime = now;
             double delta = (updateLength / ((double)OPTIMAL_TIME))/TARGET_FPS;
             
-            update(delta);
-            
-            cf.update();
-            rf.update();
-            wf.update();
+            update(delta);            
+            fileHandler.update();
+
             
             //frame.repaint();
             frame.panel.paintImmediately(0,0,PANEL_X ,PANEL_Y);
@@ -91,5 +94,9 @@ public class Game {
                 Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    
+    public static void correctTime() {
+        lastLoopTime = System.nanoTime();
     }
 }

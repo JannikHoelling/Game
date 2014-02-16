@@ -14,7 +14,9 @@ public class World {
     public static final int WORLD_X = 64;
     public static final int WORLD_Y = 64;
     
-    public static String FILE = "block.txt";
+    public static String FILE = "";
+    public static final String ENDING = ".sav";
+    
     
     
     public static void setPanel(int x, int y) {

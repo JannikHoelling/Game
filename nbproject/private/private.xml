@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Informatik/Game/Game1/src/Game/Main.java</file>
+            <file>file:/D:/Informatik/Game/Game1/src/Game/Game.java</file>
+            <file>file:/D:/Informatik/Game/Game1/src/Game/File/ReadFile.java</file>
+            <file>file:/D:/Informatik/Game/Game1/src/Game/Entity/Entity.java</file>
+            <file>file:/D:/Informatik/Game/Game1/src/Game/World.java</file>
+            <file>file:/D:/Informatik/Game/Game1/src/Game/File/CreateFile.java</file>
+            <file>file:/D:/Informatik/Game/Game1/src/Game/File/WriteFile.java</file>
         </group>
     </open-files>
 </project-private>
