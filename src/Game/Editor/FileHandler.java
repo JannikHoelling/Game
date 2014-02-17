@@ -11,42 +11,28 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 import Game.Game;
 import Game.Input;
 import Game.Map.BlockType;
-
 import static Game.Game.correctTime;
 import static Game.Map.Terrain.terrain;
 import static Game.World.*;
 
 public class FileHandler {
 
-    Formatter f;
-    Scanner sc;
-
-    JFrame frame = new JFrame();
-    JFileChooser fileChooser;
-
-    FileNameExtensionFilter filter = new FileNameExtensionFilter("save (*.sav)", "sav");
-    
-    private boolean saved = false;
-    private boolean exit = false;
+    private Formatter f;
+    private Scanner sc;
+    private JFrame frame = new JFrame();
+    private JFileChooser fileChooser;
+    private FileNameExtensionFilter filter = new FileNameExtensionFilter("save (*.sav)", "sav");
+    private boolean saved = false; //true if game was saved
+    private boolean exit = false; //true if user wants to exit game (for saving game)
 
     public void update() {
+        //strg + s for saving
         if (Input.keys[KeyEvent.VK_S] && Input.keys[KeyEvent.VK_CONTROL]) {
             save();
             Input.keys[KeyEvent.VK_S] = false;
-            Input.keys[KeyEvent.VK_CONTROL] = false;
-            correctTime();
-        } else if (Input.keys[KeyEvent.VK_A] && Input.keys[KeyEvent.VK_CONTROL]) {
-            saveAs();
-            Input.keys[KeyEvent.VK_A] = false;
-            Input.keys[KeyEvent.VK_CONTROL] = false;
-            correctTime();
-        } else if (Input.keys[KeyEvent.VK_D] && Input.keys[KeyEvent.VK_CONTROL]) {
-            load();
-            Input.keys[KeyEvent.VK_D] = false;
             Input.keys[KeyEvent.VK_CONTROL] = false;
             correctTime();
         }
@@ -54,6 +40,7 @@ public class FileHandler {
 
     public void save() {
         if (FILE == null || !FILE.isEmpty()) {
+            //if no current file
             try {
                 writeFile(new Formatter(FILE));
                 saved = true;
@@ -62,28 +49,31 @@ public class FileHandler {
                 Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
+            //set current file
             saveAs();
         }
-        
-        if(exit && saved) {
-                System.exit(0);
-            }
+
+        if (exit && saved) {
+            //if game was saved and player wants to quit
+            System.exit(0);
+        }
     }
 
     public void saveAs() {
-        fileChooser = new JFileChooser("save\\");
-        fileChooser.setFileFilter(filter);
+        fileChooser = new JFileChooser("save\\"); //current direction
+        fileChooser.setFileFilter(filter); //ExtensionFilter
         fileChooser.setDialogTitle("Specify a file to save");
 
         int selection = fileChooser.showSaveDialog(frame);
-
         if (selection == JFileChooser.APPROVE_OPTION) {
             File fileToSave = fileChooser.getSelectedFile();
 
             if (fileToSave.exists()) {
+                //file exists - overwrite
                 int result = JOptionPane.showConfirmDialog(null, "File already exists, overwrite?", "Existing file", JOptionPane.YES_NO_CANCEL_OPTION);
                 switch (result) {
                     case JOptionPane.YES_OPTION:
+                        //set current file
                         FILE = fileToSave.getAbsolutePath();
                         saved = true;
                         break;
@@ -96,9 +86,11 @@ public class FileHandler {
                         return;
                 }
             } else {
+                //set current file
                 FILE = fileToSave.getAbsolutePath();
             }
-
+            
+            //ending only once
             if (!FILE.contains(ENDING)) {
                 FILE += ENDING;
             }
@@ -112,12 +104,11 @@ public class FileHandler {
     }
 
     public void load() {
-        fileChooser = new JFileChooser("save\\");
-        fileChooser.setFileFilter(filter);
+        fileChooser = new JFileChooser("save\\"); //current direction
+        fileChooser.setFileFilter(filter); //ExtensionFilter
         fileChooser.setDialogTitle("Choose a file to open");
 
         int selection = fileChooser.showOpenDialog(frame);
-
         if (selection == JFileChooser.APPROVE_OPTION) {
             File fileToOpen = fileChooser.getSelectedFile();
             FILE = fileToOpen.getAbsolutePath();
@@ -136,6 +127,7 @@ public class FileHandler {
     }
 
     public static void createFolder() {
+        //create saveFolder if not exists
         File dir = new File("save");
         if (!dir.exists()) {
             dir.mkdir();
@@ -143,6 +135,7 @@ public class FileHandler {
     }
 
     private void writeFile(Formatter f) {
+        //write into file
         for (int x = 0; x < WORLD_X; x++) {
             for (int y = 0; y < WORLD_Y; y++) {
                 f.format("%d %d %s\n", x, y, terrain[x][y].blockType.name());
@@ -154,6 +147,7 @@ public class FileHandler {
     }
 
     private void readFile(Scanner sc) {
+        //read file and set blocktypes
         while (sc.hasNext()) {
             float x = sc.nextFloat();
             float y = sc.nextFloat();
@@ -172,9 +166,11 @@ public class FileHandler {
             }
 
         }
+        sc.close();
     }
-    
+
     public void setExit() {
+        //set true if user wants to quit
         exit = true;
     }
 

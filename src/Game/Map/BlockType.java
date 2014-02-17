@@ -10,14 +10,13 @@ import javax.imageio.ImageIO;
 
 public enum BlockType {
 
-    AIR("res\\air.png"), DIRT("res\\dirt.png"), DIRT_FULL("res\\dirt_full.png"), GRASS("res\\grass.png");
+    AIR("res\\block\\air.png"), DIRT("res\\block\\dirt.png"), DIRT_FULL("res\\block\\dirt_full.png"), 
+    GRASS("res\\block\\grass.png");
 
-    public final String location;
-
-    public BufferedImage image;
+    private final String location;
+    private BufferedImage image;
 
     private BlockType(String location) {
-        
         this.location = location;
         
         try {
@@ -26,6 +25,10 @@ public enum BlockType {
             Logger.getLogger(BlockType.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    public BufferedImage getImage() {
+        return image;
     }
 
 }

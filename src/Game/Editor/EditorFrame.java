@@ -1,109 +1,91 @@
 package Game.Editor;
 
-import Game.GamePanel;
+import Game.Game;
+import static Game.World.*;
 import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+import java.awt.GridLayout;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
-public class EditorFrame implements ActionListener {
-    
-    JFrame edFrame;
-    Container container;
-    JMenuBar menu = new JMenuBar();
 
-    JMenu file = new JMenu("File");
-    JMenu options = new JMenu("Options");
-    JMenu help = new JMenu("Help");
-    
-    JMenuItem newFile = new JMenuItem("New");
-    JMenuItem save = new JMenuItem("Save", new ImageIcon("res\\icon\\save.png"));
-    JMenuItem saveAs = new JMenuItem("Save As..", new ImageIcon("res\\icon\\saveAs.png"));
-    JMenuItem load = new JMenuItem("Load", new ImageIcon("res\\icon\\load.png"));
-    JMenuItem exit = new JMenuItem("Exit", new ImageIcon("res\\icon\\stop.png"));
-    
-    JMenuItem settings = new JMenuItem("Settings", new ImageIcon("res\\icon\\settings.png"));
-
-    JMenuItem faq = new JMenuItem("FAQ");
-    JMenuItem about = new JMenuItem("About");
+public class EditorFrame extends JFrame {
+      
+    private MenuPanel menuPanel = new MenuPanel();
+    private EditorPanel editorPanel = new EditorPanel(); 
+    private JPanel gamePanel = new JPanel(); //panel for the game (position)
+    private GridLayout layout = new GridLayout(0, 5, 1, 1);
     
     public GamePanel panel = new GamePanel();
+    
+    
+    public EditorFrame() {
+        this.setTitle("Teeworlds Fake");
+        this.setSize(FRAME_X, FRAME_Y);
 
-    public EditorFrame(int sizeX, int sizeY) {
-        edFrame = new JFrame("Teeworlds Fake");
-        container = edFrame.getContentPane();
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        closeWindows();
 
-        newFile.addActionListener(this);
-        save.addActionListener(this);
-        saveAs.addActionListener(this);
-        load.addActionListener(this);
-        exit.addActionListener(this);
+        gamePanel.setLayout(new BorderLayout());
+        gamePanel.setBorder(BorderFactory.createEtchedBorder());
+        gamePanel.add(panel);
+
+        menuPanel.setLayout(layout);
+        setJMenuBar(menuPanel.menubar);
         
-        settings.addActionListener(this);
+        add(gamePanel, BorderLayout.CENTER);
+        add(menuPanel.toolbar, BorderLayout.NORTH);
+        add(editorPanel, BorderLayout.WEST);
 
-        faq.addActionListener(this);
-        about.addActionListener(this);
-
-        menu.add(file);
-        menu.add(options);
-        menu.add(help);
-
-        file.add(newFile);
-        file.add(save);
-        file.add(saveAs);
-        file.add(load);
-        file.add(exit);
-        
-        options.add(settings);
-
-        help.add(faq);
-        help.add(about);
-
-        edFrame.add(menu, BorderLayout.NORTH);
-
-        //edFrame.add(panel, BorderLayout.SOUTH);
-        
-
-        edFrame.setSize(sizeX, sizeY);
-        edFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        edFrame.setVisible(true);
-
+        this.addComponentListener(new FrameListener());
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-          if (e.getSource() == newFile){
-               System.out.println("newFile wurde angeklickt");
-          }
-          if (e.getSource() == save){
-               System.out.println("save wurde angeklickt");
-          }
-          if (e.getSource() == saveAs){
-               System.out.println("saveAs wurde angeklickt");
-          }
-          if (e.getSource() == load){
-               System.out.println("load wurde angeklickt");
-          }
-          if (e.getSource() == exit){
-               System.out.println("exit wurde angeklickt");
-          }
-          if (e.getSource() == settings){
-               System.out.println("settings wurde angeklickt");
-          }
-          if (e.getSource() == faq){
-               System.out.println("faq wurde angeklickt");
-          }
-          if (e.getSource() == about){
-               System.out.println("about wurde angeklickt");
-          }
-     }
+    private void closeWindows() {
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                exit(); //ask for saving bevor closing
+            }
+        });
+    }
 
+    public static void exit() {
+        //ask for saving bevor closing
+        int result = JOptionPane.showConfirmDialog(null,
+                "Save game before closing?", "Confirm exit",
+                JOptionPane.YES_NO_CANCEL_OPTION);
+
+        switch (result) {
+            case JOptionPane.YES_OPTION:
+                Game.fileHandler.setExit();
+                Game.fileHandler.save();
+                return;
+            case JOptionPane.NO_OPTION:
+                System.exit(0);
+        }
+    }
+    
+    private class FrameListener implements ComponentListener {
+
+        @Override
+        public void componentResized(ComponentEvent ce) {
+            FRAME_X = panel.getWidth();
+            FRAME_Y = panel.getHeight();
+        }
+
+        @Override
+        public void componentMoved(ComponentEvent ce) {}
+
+        @Override
+        public void componentShown(ComponentEvent ce) {}
+
+        @Override
+        public void componentHidden(ComponentEvent ce) {}
+        
+    }
 }

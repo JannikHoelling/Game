@@ -3,7 +3,6 @@ package Game.Map;
 import Game.Renderer;
 import java.awt.Graphics2D;
 import java.util.Random;
-
 import static Game.World.*;
 import java.awt.Rectangle;
 
@@ -15,7 +14,23 @@ public class Terrain {
 
     public Terrain() {
         terrain = new Block[WORLD_X][WORLD_Y];
+        
+        randomMap();
+        bounds = new Rectangle(0, 0, WORLD_X * TILE_SIZE, WORLD_Y * TILE_SIZE);
+    }
 
+    public void render(Graphics2D g) {
+        for (int x = 0; x < terrain.length; x++) {
+            for (int y = 0; y < terrain[0].length; y++) {
+                if (terrain[x][y].blockType != BlockType.AIR) {
+                    g.drawImage(terrain[x][y].blockType.getImage(), (int) x * TILE_SIZE + Renderer.offsetX() - WORLD_X * TILE_SIZE / 2, (int) y * TILE_SIZE + Renderer.offsetY() - WORLD_Y * TILE_SIZE / 2, TILE_SIZE, TILE_SIZE, null);
+                }
+            }
+        }
+    }
+    
+    private void randomMap() {
+        //random map
         Random rand = new Random();
 
         for (int x = 0; x < WORLD_X; x++) {
@@ -25,19 +40,6 @@ public class Terrain {
                     terrain[x][y].blockType = BlockType.DIRT;
                 } else {
                     terrain[x][y] = new Block();
-                }
-            }
-        }
-
-        bounds = new Rectangle(0, 0, WORLD_X * TILE_SIZE, WORLD_Y * TILE_SIZE);
-    }
-
-    public void render(Graphics2D g) {
-        for (int x = 0; x < terrain.length; x++) {
-            for (int y = 0; y < terrain[0].length; y++) {
-                if (terrain[x][y].blockType != BlockType.AIR) {
-                    g.drawImage(terrain[x][y].blockType.image, (int) x * TILE_SIZE + Renderer.offsetX() - WORLD_X * TILE_SIZE / 2, (int) y * TILE_SIZE + Renderer.offsetY() - WORLD_Y * TILE_SIZE / 2, TILE_SIZE, TILE_SIZE, null);
-                    //g.fillRect((int) x * TILE_SIZE + Renderer.offsetX() - WORLD_X * TILE_SIZE / 2, (int) y * TILE_SIZE + Renderer.offsetY() - WORLD_Y * TILE_SIZE / 2, TILE_SIZE, TILE_SIZE);
                 }
             }
         }

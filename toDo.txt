@@ -1,0 +1,6 @@
+Main: initVar() - richtige Werte/Groesse richtig anpassen
+this.
+setCurrentFile
+bilder
+EditorPanel: panelChanger
+strg + s - focus (deaktivieren inGame)

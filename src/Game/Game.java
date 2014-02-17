@@ -5,41 +5,38 @@ import Game.Editor.FileHandler;
 import Game.Map.Terrain;
 import Game.Entity.Player;
 import Game.Entity.Entity;
-import Game.File.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import static Game.World.*;
+import javax.swing.JFrame;
 
 
-public class Game {
+public class Game implements Runnable {
     
-    public static GameFrame frame;
-    public static EditorFrame edFrame;
-    
+    public static ArrayList<Entity> entities = new ArrayList<>(); 
     public static double time;
-        
-    Input input = new Input();
-    public static Terrain terrain;
-    
-    public static ArrayList<Entity> entities = new ArrayList<>();
-    
-    public static float timePerFrame = 0.0f;
-    
+    public static Terrain terrain;   
+    public static float timePerFrame = 0.0f; 
     public static FileHandler fileHandler;
-    
     public static Player player;
+    public static EditorFrame frame;
     public static long lastLoopTime;
-
+    
+    private boolean isRunning = false;
+    private Input input = new Input();
+    
     public Game() {
-        frame = new GameFrame(PANEL_X, PANEL_Y);
-        edFrame = new EditorFrame(PANEL_X, PANEL_Y);
+        frame = new EditorFrame();
+        terrain = new Terrain();
         fileHandler = new FileHandler();
+        player = new Player(0, 0);
         
-        frame.panel.addKeyListener(input);
-        frame.panel.addMouseMotionListener(input);
-        frame.panel.addMouseListener(input);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); //maximize frame
+        entities.add(player);
+        FileHandler.createFolder(); //create save-Folder
+
+        frame.setVisible(true);
     }
     
     public void update(double delta) {
@@ -55,34 +52,25 @@ public class Game {
         time += delta;
     }
     
-    public void start(){
-        terrain = new Terrain();
-        
-        player = new Player(0, 0);
-        entities.add(player);
-        
-        frame.setVisible(true);
-        
-        fileHandler.createFolder();
-        
-        lastLoopTime = System.nanoTime();
-        
+    @Override
+    public void run(){
         // keep looping round til the game ends
-        while (true) {
+        while (isRunning) {
             // work out how long its been since the last update, this
             // will be used to calculate how far the entities should
             // move this loop
+            
+            frame.panel.requestFocusInWindow(); //focus on game panel
+            fileHandler.update(); //check keyinput in fileHandler
+            
             long now = System.nanoTime();
             long updateLength = now - lastLoopTime;
             lastLoopTime = now;
             double delta = (updateLength / ((double)OPTIMAL_TIME))/TARGET_FPS;
             
-            update(delta);            
-            fileHandler.update();
+            update(delta);             
 
-            
-            //frame.repaint();
-            frame.panel.paintImmediately(0,0,PANEL_X ,PANEL_Y);
+            frame.panel.paintImmediately(0,0,GAME_X ,GAME_Y);
             
             timePerFrame = ((float)(System.nanoTime() - lastLoopTime) / 1000000);
             
@@ -94,6 +82,20 @@ public class Game {
                 Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    
+    public void start() {
+        lastLoopTime = System.nanoTime();
+        frame.panel.addKeyListener(input);
+        frame.panel.addMouseMotionListener(input);
+        frame.panel.addMouseListener(input);
+
+        isRunning = true;
+        new Thread(this).start();
+    }
+    
+    public void stop() {
+        isRunning = false;
     }
     
     public static void correctTime() {

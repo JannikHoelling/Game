@@ -59,10 +59,10 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
     public void mouseExited(MouseEvent me) {}
     
     public static int getMouseX() {
-        return mouseX - World.PANEL_X/2 + Camera.x;
+        return mouseX - World.FRAME_X/2 + Camera.x;
     }
     
     public static int getMouseY() {
-        return mouseY - World.PANEL_Y/2 + Camera.y;
+        return mouseY - World.FRAME_Y/2 + Camera.y;
     }
 }
