@@ -27,7 +27,7 @@ public class Game implements Runnable {
     public static float timePerFrame = 0.0f; 
     public static double time;
     
-    private boolean isRunning = false;
+    private static boolean isRunning = false;
     
     public Game() {
         frame = new EditorFrame();
@@ -58,6 +58,7 @@ public class Game implements Runnable {
     
     @Override
     public void run(){
+        fileHandler.save();
         // keep looping round til the game ends
         while (isRunning) {
             // work out how long its been since the last update, this
@@ -102,7 +103,11 @@ public class Game implements Runnable {
         isRunning = false;
     }
     
-    public static void correctTime() {
+    public static boolean isRunning() {
+        return isRunning;
+    }
+    
+    public static void resetFrameTime() {
         lastLoopTime = System.nanoTime();
     }
 }

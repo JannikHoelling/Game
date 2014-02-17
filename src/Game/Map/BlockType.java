@@ -10,8 +10,8 @@ import javax.imageio.ImageIO;
 
 public enum BlockType {
 
-    AIR("res\\block\\air.png"), DIRT("res\\block\\dirt.png"), DIRT_FULL("res\\block\\dirt_full.png"), 
-    GRASS("res\\block\\grass.png");
+    AIR("res\\blocks\\air.png"), DIRT("res\\blocks\\dirt.png"), DIRT_FULL("res\\blocks\\dirt_full.png"), 
+    GRASS("res\\blocks\\grass.png");
 
     private final String location;
     private BufferedImage image;

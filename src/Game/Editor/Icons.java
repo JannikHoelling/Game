@@ -4,9 +4,9 @@ import javax.swing.ImageIcon;
 
 
 public enum Icons {
-    NEW("res\\icon\\new.png"), SAVE("res\\icon\\save.png"), SAVEAS("res\\icon\\saveAs.png"), LOAD("res\\icon\\load.png"),
-    EXIT("res\\icon\\stop.png"), SETTINGS("res\\icon\\settings.png"), FAQ("res\\icon\\infos.png"), ABOUT("res\\icon\\infos.png"),
-    UNDO("res\\icon\\undo.png"), REDO("res\\icon\\redo.png"), START("res\\icon\\run.png"), STOP("res\\icon\\stop.png");
+    NEW("res\\icons\\new.png"), SAVE("res\\icons\\save.png"), SAVEAS("res\\icons\\saveAs.png"), LOAD("res\\icons\\load.png"),
+    EXIT("res\\icons\\stop.png"), SETTINGS("res\\icons\\settings.png"), FAQ("res\\icons\\infos.png"), ABOUT("res\\icons\\infos.png"),
+    UNDO("res\\icons\\undo.png"), REDO("res\\icons\\redo.png"), START("res\\icons\\run.png"), STOP("res\\icons\\stop.png");
 
     private final String location;
     private final ImageIcon icon;

@@ -18,7 +18,8 @@ public class World {
     public static final int WORLD_X = 64; //number of blocks
     public static final int WORLD_Y = 64; //number of blocks
     
-    public static String FILE = ""; //current savefile
+    public static String FILE = "save"; //current savefile
+    public static String PATH = "save\\";
     public static final String ENDING = ".sav"; //extensions of savefile
     
     public static final String[] SELECTIONS = {"Blocks", "Interactives", "Decoration", "Player"}; 

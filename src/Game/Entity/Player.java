@@ -24,7 +24,7 @@ public class Player extends RigidBody {
         super(x, y);
 
         try {
-            image = ImageIO.read(new File("res\\figur.png"));
+            image = ImageIO.read(new File("res\\players\\figur.png"));
         } catch (IOException ex) {
             Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
         }

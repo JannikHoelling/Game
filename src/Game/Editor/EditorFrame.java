@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 
 public class EditorFrame extends JFrame {
       
-    private MenuPanel menuPanel = new MenuPanel();
+    public static MenuPanel menuPanel = new MenuPanel();
     private EditorPanel editorPanel = new EditorPanel(); 
     private JPanel gamePanel = new JPanel(); //panel for the game (position)
     private GridLayout layout = new GridLayout(0, 5, 1, 1);

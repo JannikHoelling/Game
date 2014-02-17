@@ -14,7 +14,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import Game.Game;
 import Game.Input;
 import Game.Map.BlockType;
-import static Game.Game.correctTime;
+import static Game.Game.*;
 import static Game.Map.Terrain.terrain;
 import static Game.World.*;
 
@@ -34,33 +34,40 @@ public class FileHandler {
             save();
             Input.keys[KeyEvent.VK_S] = false;
             Input.keys[KeyEvent.VK_CONTROL] = false;
-            correctTime();
+            resetFrameTime();
         }
     }
 
     public void save() {
         if (FILE == null || !FILE.isEmpty()) {
             //if no current file
-            try {
-                writeFile(new Formatter(FILE));
-                saved = true;
-                JOptionPane.showMessageDialog(null, "Game saved!", "SAVED", JOptionPane.INFORMATION_MESSAGE);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, ex);
+            if (!FILE.isEmpty()) {
+                //if no current file
+                pathEnding();
+                try {
+                    writeFile(new Formatter(PATH + FILE));
+                    saved = true;
+                    if (!isRunning()) {
+                        JOptionPane.showMessageDialog(null, "Game saved!", "SAVED", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                //set current file
+                saveAs();
             }
-        } else {
-            //set current file
-            saveAs();
-        }
 
-        if (exit && saved) {
-            //if game was saved and player wants to quit
-            System.exit(0);
+            if (exit && saved) {
+                //if game was saved and player wants to quit
+                System.exit(0);
+            }
         }
     }
 
     public void saveAs() {
         fileChooser = new JFileChooser("save\\"); //current direction
+        fileChooser = setCurrentDir(); //current direction
         fileChooser.setFileFilter(filter); //ExtensionFilter
         fileChooser.setDialogTitle("Specify a file to save");
 
@@ -89,11 +96,14 @@ public class FileHandler {
                 //set current file
                 FILE = fileToSave.getAbsolutePath();
             }
-            
+
             //ending only once
             if (!FILE.contains(ENDING)) {
                 FILE += ENDING;
             }
+
+            pathEnding();
+
             try {
                 f = new Formatter(FILE);
             } catch (FileNotFoundException ex) {
@@ -167,6 +177,18 @@ public class FileHandler {
 
         }
         sc.close();
+    }
+
+    private void pathEnding() {
+        //ending only once
+        if (!FILE.contains(ENDING)) {
+            FILE += ENDING;
+        }
+    }
+
+    private JFileChooser setCurrentDir() {
+        //current direction
+        return new JFileChooser(PATH);
     }
 
     public void setExit() {
