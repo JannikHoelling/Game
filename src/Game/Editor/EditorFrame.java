@@ -28,8 +28,8 @@ public class EditorFrame extends JFrame {
         this.setTitle("Teeworlds Fake");
         this.setSize(FRAME_X, FRAME_Y);
 
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        closeWindows();
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //closeWindows();
 
         gamePanel.setLayout(new BorderLayout());
         gamePanel.setBorder(BorderFactory.createEtchedBorder());

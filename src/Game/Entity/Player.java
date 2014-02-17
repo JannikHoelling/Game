@@ -12,9 +12,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
-public class Player extends Entity {
+public class Player extends RigidBody {
 
-    private float speed = 250f;
+    private float speed = 10 ;
+    private float jumpForce = 750;
     private float dX;
     private float dY;
     private BufferedImage image;
@@ -39,21 +40,24 @@ public class Player extends Entity {
     @Override
     public void update(float delta) {
         if(Input.keys[KeyEvent.VK_A]){
-            dX -= 10f;
+            dX -= speed;
         }
 
         if(Input.keys[KeyEvent.VK_D]){
-            dX += 10f;
+            dX += speed;
         }
         
+        // Jumping
         if(Input.keys[KeyEvent.VK_SPACE]) {
-            dY = -500;
+            if (!Terrain.getBlock(x + HALF_TILE-1, y + HALF_TILE) || !Terrain.getBlock(x - HALF_TILE, y + HALF_TILE)) {
+                dY = - jumpForce;
+            }
         }
         
         // Adding fall speed
         dY += delta * 981f;
         
-        // Slowing down when touching the ground
+        // Slowing down when touching the ground and not pressing A, D
         if(!Input.keys[KeyEvent.VK_A] && !Input.keys[KeyEvent.VK_D] && (!Terrain.getBlock(x + HALF_TILE-1, y + HALF_TILE) || !Terrain.getBlock(x - HALF_TILE, y + HALF_TILE))) {
             dX *= 0.8;
         }
@@ -74,7 +78,7 @@ public class Player extends Entity {
             }
         }
         
-        //Vertical movement
+        // add vertical movement
         y += delta * dY;
         
         if(dY < 0) { // Check floor
@@ -90,6 +94,7 @@ public class Player extends Entity {
             }
         }
 
+        
         if (Input.mouseClicked) {
             SpawnTools.spawnProjectile(x, y, Input.getMouseX(), Input.getMouseY(), 500f);
         }
@@ -106,21 +111,7 @@ public class Player extends Entity {
         return ((int) Math.ceil((value - HALF_TILE) / TILE_SIZE)) * TILE_SIZE;
     }
     
-    public float getX() {
-        return x;
-    }
     
-    public float getY() {
-        return y;
-    }
-    
-    public void setX(float x) {
-        this.x = x;
-    }
-    
-    public void setY(float y) {
-        this.y = y;
-    }
     
     public float getDX() {
         return dX;

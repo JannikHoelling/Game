@@ -3,8 +3,7 @@ package Game;
 import Game.Editor.EditorFrame;
 import Game.Editor.FileHandler;
 import Game.Map.Terrain;
-import Game.Entity.Player;
-import Game.Entity.Entity;
+import Game.Entity.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,16 +14,20 @@ import javax.swing.JFrame;
 public class Game implements Runnable {
     
     public static ArrayList<Entity> entities = new ArrayList<>(); 
-    public static double time;
-    public static Terrain terrain;   
-    public static float timePerFrame = 0.0f; 
-    public static FileHandler fileHandler;
+    public static ArrayList<RigidBody> collider = new ArrayList<>();
+    
+    public static Terrain terrain;
     public static Player player;
+    private Input input = new Input();
+    
     public static EditorFrame frame;
+    public static FileHandler fileHandler;
+    
     public static long lastLoopTime;
+    public static float timePerFrame = 0.0f; 
+    public static double time;
     
     private boolean isRunning = false;
-    private Input input = new Input();
     
     public Game() {
         frame = new EditorFrame();
@@ -33,7 +36,7 @@ public class Game implements Runnable {
         player = new Player(0, 0);
         
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); //maximize frame
-        entities.add(player);
+        //entities.add(player);
         FileHandler.createFolder(); //create save-Folder
 
         frame.setVisible(true);
@@ -42,12 +45,13 @@ public class Game implements Runnable {
     public void update(double delta) {
         // Loop through all entities, update them or remove them if they are marked to be deleted
         for (int i = 0; i < entities.size(); i++) {
-            if(!entities.get(i).delete) {
-                entities.get(i).update((float) delta);
-            }
-            else {
+            
+            Entity e = entities.get(i);
+            
+            if(!e.isAlive())
+                e.update((float) delta);
+            else
                 entities.remove(i);
-            }
         }
         time += delta;
     }
