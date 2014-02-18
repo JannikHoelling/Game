@@ -1,6 +1,61 @@
 Main: initVar() - richtige Werte/Groesse richtig anpassen
 this.
-setCurrentFile
-bilder
 EditorPanel: panelChanger
-strg + s - focus (deaktivieren inGame)
+
+
+Bilder
+	
+	16x16 Pixel					BEISPIEL
+		- new file				leere Seite
+		- load / open			Ordner
+		- save					Diskette
+		- save As				Zwei Disketten
+		- exit					X-Bild
+		- settings				Zahnrad
+		- help					Fragezeichen
+		- about					Ausrufezeichen oder i
+		- start					play-Zeichen
+		- stop					stop-Zeichen
+		- brushPlus				plus
+		- brushMinus			minus
+		- undo					Pfeil
+		- redo					Pfeil
+		- fill					Füllwerkzeig Paint
+	
+	
+	32x32 Pixel
+		BLOCKS:
+			- air
+			- dirt
+			- grass
+			- stone
+			- glass
+			- ice
+			- wood
+			- sand
+			
+		INTERACTIVES:
+			- coin
+			- box
+			- heart
+			- weapons
+			- teleport
+			- fähigkeiten
+		
+		DECORATIONS:
+			- flowers
+			- grass
+			- rock
+			- tree
+			
+		PLAYERS:
+			- cat
+			- dog
+			- rabbit
+			
+	
+	100x50 Pixel
+		- background
+		musik
+		
+		

@@ -13,21 +13,19 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-
 public class EditorFrame extends JFrame {
-      
+
     public static MenuPanel menuPanel = new MenuPanel();
-    private EditorPanel editorPanel = new EditorPanel(); 
+    private EditorPanel editorPanel = new EditorPanel();
     private JPanel gamePanel = new JPanel(); //panel for the game (position)
     private GridLayout layout = new GridLayout(0, 5, 1, 1);
-    
+
     public GamePanel panel = new GamePanel();
-    
-    
+    public static Game game = new Game();
+
     public EditorFrame() {
         this.setTitle("Teeworlds Fake");
         this.setSize(FRAME_X, FRAME_Y);
-
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         //closeWindows();
 
@@ -37,7 +35,7 @@ public class EditorFrame extends JFrame {
 
         menuPanel.setLayout(layout);
         setJMenuBar(menuPanel.menubar);
-        
+
         add(gamePanel, BorderLayout.CENTER);
         add(menuPanel.toolbar, BorderLayout.NORTH);
         add(editorPanel, BorderLayout.WEST);
@@ -69,7 +67,7 @@ public class EditorFrame extends JFrame {
                 System.exit(0);
         }
     }
-    
+
     private class FrameListener implements ComponentListener {
 
         @Override
@@ -79,13 +77,16 @@ public class EditorFrame extends JFrame {
         }
 
         @Override
-        public void componentMoved(ComponentEvent ce) {}
+        public void componentMoved(ComponentEvent ce) {
+        }
 
         @Override
-        public void componentShown(ComponentEvent ce) {}
+        public void componentShown(ComponentEvent ce) {
+        }
 
         @Override
-        public void componentHidden(ComponentEvent ce) {}
-        
+        public void componentHidden(ComponentEvent ce) {
+        }
+
     }
 }

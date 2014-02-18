@@ -1,5 +1,6 @@
 package Game;
 
+import Game.Editor.EditorFrame;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import static Game.World.*;
@@ -12,11 +13,13 @@ public class Main {
      */
     
     public static Game game;
+    public static EditorFrame frame;
     static Dimension dim = new Dimension();
     static Toolkit tk = Toolkit.getDefaultToolkit();
     
     public static void main(String[] args) {   
         initVar();
+        //frame = new EditorFrame(args[0]); 
         game = new Game();
     }
     
@@ -31,5 +34,8 @@ public class Main {
         
         GAME_X = FRAME_X-EDITOR_X;
         GAME_Y = FRAME_Y;
+        
+        HALF_FRAME_X = FRAME_X/2;
+        HALF_FRAME_Y = FRAME_Y/2;
     }
 }

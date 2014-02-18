@@ -5,10 +5,10 @@ import static Game.World.*;
 public class Renderer {
     
     public static int offsetX() {
-        return - Camera.x + FRAME_X/2;
+        return - Camera.x + HALF_FRAME_X;
     }
     
     public static int offsetY() {
-        return - Camera.y + FRAME_Y/2;
+        return - Camera.y + HALF_FRAME_Y;
     }
 }

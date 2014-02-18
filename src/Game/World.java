@@ -8,6 +8,8 @@ public class World {
     
     public static int FRAME_X = 0; //x-size windows
     public static int FRAME_Y = 0; //y-size windows
+    public static int HALF_FRAME_X = FRAME_X/2;
+    public static int HALF_FRAME_Y = FRAME_Y/2;
     public static int EDITOR_X = 0; //x-size editorpanel
     public static int EDITOR_Y = 0; //x-size editorpanel
     public static int GAME_X = 0; //x-size gamepanel
@@ -23,5 +25,4 @@ public class World {
     public static final String ENDING = ".sav"; //extensions of savefile
     
     public static final String[] SELECTIONS = {"Blocks", "Interactives", "Decoration", "Player"}; 
-
 }
