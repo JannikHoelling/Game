@@ -1,61 +1,87 @@
 Main: initVar() - richtige Werte/Groesse richtig anpassen
 this.
 EditorPanel: panelChanger
+HotKeys
+	strg+s
+	strg+z
+	strg+y
+Grid
 
 
 Bilder
 	
-	16x16 Pixel					BEISPIEL
-		- new file				leere Seite
-		- load / open			Ordner
-		- save					Diskette
-		- save As				Zwei Disketten
-		- exit					X-Bild
-		- settings				Zahnrad
-		- help					Fragezeichen
-		- about					Ausrufezeichen oder i
-		- start					play-Zeichen
-		- stop					stop-Zeichen
-		- brushPlus				plus
-		- brushMinus			minus
-		- undo					Pfeil
-		- redo					Pfeil
-		- fill					Füllwerkzeig Paint
+	16x16 Pixel					BEISPIEL						ERKLÄRUNG											FUNKTION
+		- new file				leere Seite																			neue Map
+		- load / open			Ordner																				Map laden
+		- save					Diskette																			Map speichern
+		- save As				Zwei Disketten					Disketten zb hintereinander							Pfad/Datei wählen
+		- exit					X-Bild																				exit
+		- settings				Zahnrad																				welche Einstellungen noch unklar
+		- faq					Fragezeichen																		Spielerklärung/Steuerung oder so
+		- about					Ausrufezeichen oder i																das übliche about.. :D
+		- start					play-Zeichen																		spiel starten
+		- stop					stop-Zeichen																		spiel stoppen
+		- brushPlus				plus							einfach ein plus									Pinsel größer => Flächenzeichnen
+		- brushMinus			minus							einfach ein minus									Pinsel kleiner
+		- undo					Pfeil																				letzte Funktion rückgängig
+		- redo					Pfeil																				Undo rückgängig
+		- fill					Füllwerkzeig Paint																	ganze Flächefüllen
 	
 	
 	32x32 Pixel
 		BLOCKS:
 			- air
-			- dirt
-			- grass
-			- stone
-			- glass
-			- ice
-			- wood
-			- sand
+			- dirt*
+			- grass*
+			- stone*
+			- glass*
+			- ice*
+			- wood*
+			- sand*
+			- water**
+			- lava**
 			
-		INTERACTIVES:
-			- coin
-			- box
-			- heart
-			- weapons
-			- teleport
-			- fähigkeiten
+		* Block mit Konturen d.h. verschiedene dunklere Stellen (ggf. auch mehr einer Sorte)
+		** mehrere Bilder => Bewegung
+		
+		INTERACTIVES:			ERKLÄRUNG													SPIEL
+			- coin				mind. 9 Bilder aus verschiedenen Perspektiven				wenn einer stirbt kann so ein coin auftauchen oder einfach zufällig => ab bestimmte Anzahl passiert was, zb neue Waffe oder so
+			- box				offene Box/geschlossene										zufällig ein item => coin, heart, weapon, skills
+			- heart				mind. 6 Bilder (größere und kleinere)
+			- weapons	
+				- normal
+				- mp
+				- panzerfaust
+			- teleport			je nach Map verschiedene Formen Aussehen: Eismap, Waldmap etc
+			- skills
+				- speed
+				- jump
+				- attack
 		
 		DECORATIONS:
-			- flowers
-			- grass
-			- rock
-			- tree
+			- flowers			verschiedene Blumen (Farben/Formen)
+			- grass				erhöhtes Gras
+			- rock				
+			- tree				Baumstumpf
+			- fence	
+			- clouds
 			
 		PLAYERS:
-			- cat
-			- dog
-			- rabbit
+			- rabbit*
+			- fowl*
+			- frog*
+			- fox*
+		*mehrere Bilder, durch welche eine Bewegung animiert wird; Bilder spiegeln
 			
 	
-	100x50 Pixel
+	4096x2048 Pixel
 		- background
-		musik
-		
-		
+			- forrest
+			- desert
+			- ice
+			- underground
+	
+	- musik / sounds
+	- score
+	- time
+	- leiter
