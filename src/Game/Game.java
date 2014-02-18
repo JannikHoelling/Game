@@ -27,7 +27,11 @@ public class Game implements Runnable {
     public static float timePerFrame = 0.0f; 
     public static double time;
     
+<<<<<<< HEAD
     private static boolean isRunning = false;
+=======
+    private boolean isRunning = false;
+>>>>>>> 29929671271e6271837cf89d1088fc8d7db1e8d7
     
     public Game() {
         frame = new EditorFrame();

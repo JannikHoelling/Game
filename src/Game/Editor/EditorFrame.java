@@ -26,6 +26,10 @@ public class EditorFrame extends JFrame {
     public EditorFrame() {
         this.setTitle("Teeworlds Fake");
         this.setSize(FRAME_X, FRAME_Y);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 29929671271e6271837cf89d1088fc8d7db1e8d7
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         //closeWindows();
 
