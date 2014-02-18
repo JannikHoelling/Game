@@ -27,7 +27,7 @@ public class Projectile extends Entity {
     @Override
     public void update(float delta) {     
         if(Game.time - creationTime > 10 || !Terrain.getBlock(x + dX * delta, y + dY * delta)) {
-            delete = true;
+            destroy();
         }
         else {
             x += dX * delta;
