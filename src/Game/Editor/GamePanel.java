@@ -1,9 +1,6 @@
 package Game.Editor;
 
-import Game.Camera;
-import Game.Game;
-import Game.Input;
-import Game.Renderer;
+import Game.*;
 import static Game.Game.entities;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -14,10 +11,12 @@ import java.awt.RenderingHints;
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel {
-
+    
+    public static Game game = new Game();
+    
     public GamePanel() {
         setFocusable(true);
-        requestFocusInWindow(); //focus KeyListener to gamepanel
+        requestFocusInWindow(); //focus KeyListener to gamepanel     
     }
 
     @Override
@@ -26,7 +25,7 @@ public class GamePanel extends JPanel {
         g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
         g.setColor(new Color(0, 170, 255));
-        g.fillRect(0, 0, GAME_X ,GAME_Y);
+        g.fillRect(0, 0,GAME_X ,GAME_Y);
         g.setColor(Color.BLACK);
 
         g.drawOval(Input.getMouseX() + Renderer.offsetX() - 10, Input.getMouseY() + Renderer.offsetY() - 10, 20, 20);

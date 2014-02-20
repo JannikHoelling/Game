@@ -1,7 +1,5 @@
-package Game.Editor;
+package Game;
 
-import Game.Game;
-import static Game.World.*;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ComponentEvent;
@@ -13,34 +11,46 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class EditorFrame extends JFrame {
+import Game.Editor.*;
+import static Game.World.*;
+
+public class Frame extends JFrame {
 
     public static MenuPanel menuPanel = new MenuPanel();
-    private EditorPanel editorPanel = new EditorPanel();
-    private JPanel gamePanel = new JPanel(); //panel for the game (position)
-    private GridLayout layout = new GridLayout(0, 5, 1, 1);
+    private final EditorPanel editorPanel = new EditorPanel();
+    private final JPanel gamePanel = new JPanel(); //panel for the game (position)
+    private final GridLayout layout = new GridLayout(0, 5, 1, 1);
 
-    public GamePanel panel = new GamePanel();
-    public static Game game = new Game();
+    public static GamePanel panel = new GamePanel();
 
-    public EditorFrame() {
-        this.setTitle("Teeworlds Fake");
+    public Frame(String args) {
         this.setSize(FRAME_X, FRAME_Y);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        //closeWindows();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //this.closeWindows();
+        
+        FileHandler.createFolder(); //create save-Folder
+        
+        if (args.equals("-editor")) {
+            this.setTitle("Hunting Animals - Editor");
+            gamePanel.setLayout(new BorderLayout());
+            gamePanel.setBorder(BorderFactory.createEtchedBorder());
+            gamePanel.add(panel);
 
-        gamePanel.setLayout(new BorderLayout());
-        gamePanel.setBorder(BorderFactory.createEtchedBorder());
-        gamePanel.add(panel);
-
-        menuPanel.setLayout(layout);
-        setJMenuBar(menuPanel.menubar);
-
-        add(gamePanel, BorderLayout.CENTER);
-        add(menuPanel.toolbar, BorderLayout.NORTH);
-        add(editorPanel, BorderLayout.WEST);
-
+            menuPanel.setLayout(layout);
+            this.setJMenuBar(menuPanel.menubar);
+            this.add(gamePanel, BorderLayout.CENTER);
+            this.add(menuPanel.toolbar, BorderLayout.NORTH);
+            this.add(editorPanel, BorderLayout.WEST);
+        } else {
+            this.setTitle("Hunting Animals - Game");
+            this.initVar();
+            this.add(panel);
+            GamePanel.game.start();
+        }
+        
         this.addComponentListener(new FrameListener());
+        this.setVisible(true);
     }
 
     private void closeWindows() {
@@ -88,5 +98,10 @@ public class EditorFrame extends JFrame {
         public void componentHidden(ComponentEvent ce) {
         }
 
+    }
+    
+    private void initVar() {
+        GAME_X = FRAME_X;
+        GAME_Y = FRAME_Y;
     }
 }

@@ -14,8 +14,8 @@ import javax.imageio.ImageIO;
 
 public class Player extends RigidBody {
 
-    private float speed = 10 ;
-    private float jumpForce = 750;
+    private final float speed = 10 ;
+    private final float jumpForce = 750;
     private float dX;
     private float dY;
     private BufferedImage image;

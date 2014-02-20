@@ -1,6 +1,5 @@
 package Game;
 
-import Game.Editor.EditorFrame;
 import Game.Editor.FileHandler;
 import Game.Map.Terrain;
 import Game.Entity.*;
@@ -8,7 +7,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static Game.World.*;
-import javax.swing.JFrame;
 
 
 public class Game implements Runnable {
@@ -18,9 +16,8 @@ public class Game implements Runnable {
     
     public static Terrain terrain;
     public static Player player;
-    private Input input = new Input();
+    private final Input input = new Input();
     
-    public static EditorFrame frame;
     public static FileHandler fileHandler;
     
     public static long lastLoopTime;
@@ -30,16 +27,10 @@ public class Game implements Runnable {
     private static boolean isRunning = false;
     
     public Game() {
-        frame = new EditorFrame();
         terrain = new Terrain();
         fileHandler = new FileHandler();
         player = new Player(0, 0);
-        
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); //maximize frame
-        //entities.add(player);
-        FileHandler.createFolder(); //create save-Folder
-
-        frame.setVisible(true);
+        //entities.add(player);       
     }
     
     public void update(double delta) {
@@ -65,7 +56,7 @@ public class Game implements Runnable {
             // will be used to calculate how far the entities should
             // move this loop
             
-            frame.panel.requestFocusInWindow(); //focus on game panel
+            Frame.panel.requestFocusInWindow(); //focus on game panel
             fileHandler.update(); //check keyinput in fileHandler
             
             long now = System.nanoTime();
@@ -75,7 +66,7 @@ public class Game implements Runnable {
             
             update(delta);             
 
-            frame.panel.paintImmediately(0,0,GAME_X ,GAME_Y);
+            Frame.panel.paintImmediately(0,0,GAME_X ,GAME_Y);
             
             timePerFrame = ((float)(System.nanoTime() - lastLoopTime) / 1000000);
             
@@ -91,9 +82,9 @@ public class Game implements Runnable {
     
     public void start() {
         lastLoopTime = System.nanoTime();
-        frame.panel.addKeyListener(input);
-        frame.panel.addMouseMotionListener(input);
-        frame.panel.addMouseListener(input);
+        Frame.panel.addKeyListener(input);
+        Frame.panel.addMouseMotionListener(input);
+        Frame.panel.addMouseListener(input);
 
         isRunning = true;
         new Thread(this).start();

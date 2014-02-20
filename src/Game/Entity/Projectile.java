@@ -7,8 +7,8 @@ import java.awt.Graphics2D;
 
 public class Projectile extends Entity {
 
-    private float dX, dY;
-    private double creationTime;
+    private final float dX, dY;
+    private final double creationTime;
     
     public Projectile(float x, float y, float dX, float dY) {
         super(x, y);

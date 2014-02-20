@@ -22,9 +22,9 @@ public class FileHandler {
 
     private Formatter f;
     private Scanner sc;
-    private JFrame frame = new JFrame();
+    private final JFrame frame = new JFrame();
     private JFileChooser fileChooser;
-    private FileNameExtensionFilter filter = new FileNameExtensionFilter("save (*.sav)", "sav");
+    private final FileNameExtensionFilter filter = new FileNameExtensionFilter("save (*.sav)", "sav");
     private boolean saved = false; //true if game was saved
     private boolean exit = false; //true if user wants to exit game (for saving game)
 
