@@ -4,6 +4,7 @@ import static Game.Frame.editorPanel;
 import static Game.World.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -36,6 +37,14 @@ public class EditorPanel extends JPanel {
         tabpane.addTab("Players", new Tab("Players"));
 
         tabpane.setPreferredSize(new Dimension(EDITOR_X, EDITOR_Y));
+    }
+    
+    public void enabled() {
+        tabpane.setEnabled(!tabpane.isEnabled());
+        
+        for(int i=0; i<Tab.list.size(); i++) {
+            Tab.list.get(i).setEnabled(tabpane.isEnabled());
+        }
     }
 
 }

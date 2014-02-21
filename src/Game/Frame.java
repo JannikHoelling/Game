@@ -13,27 +13,28 @@ import javax.swing.JPanel;
 
 import Game.Editor.*;
 import static Game.World.*;
+import javax.swing.JTextField;
 
 public class Frame extends JFrame {
 
     public static MenuPanel menuPanel = new MenuPanel();
-    
+
     private final JPanel gamePanel = new JPanel(); //panel for the game (position)
     private final JPanel edPanel = new JPanel(); //panel for the game (position)
     private final GridLayout layout = new GridLayout(0, 5, 1, 1);
 
     public static GamePanel panel = new GamePanel();
     public static EditorPanel editorPanel = new EditorPanel();
-    
+
     public Frame(String args) {
         this.pack();
         this.setSize(FRAME_X, FRAME_Y);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         //this.closeWindows();
-        
+
         FileHandler.createFolder(); //create save-Folder
-        
+
         if (args.equals("-editor")) {
             this.setTitle("Hunting Animals - Editor");
             gamePanel.setLayout(new BorderLayout());
@@ -50,7 +51,7 @@ public class Frame extends JFrame {
             this.setTitle("Hunting Animals - Game");
             this.initVar();
             this.add(panel);
-            GamePanel.game.start();   
+            GamePanel.game.start();
         }
         this.addComponentListener(new FrameListener());
         this.setVisible(true);
@@ -102,17 +103,17 @@ public class Frame extends JFrame {
         }
 
     }
-    
+
     private void initVar() {
         GAME_X = FRAME_X;
         GAME_Y = FRAME_Y;
     }
-    
+
     public static void enableClickable() {
-       menuPanel.enabled();
-       //editorPanel.enabled();
+        menuPanel.enabled();
+        editorPanel.enabled();
     }
-    
+
     public static void disableClickable() {
         enableClickable();
     }
