@@ -1,9 +1,11 @@
 package Game;
 
 import Game.Editor.Tab;
+import Game.Entity.Player;
 import Game.Enums.*;
 import Game.Map.Terrain;
 import static Game.World.*;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -19,6 +21,8 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
 
     private static String name = "";
     private static String type = "";
+    
+    Dimension dim = new Dimension();
 
     public static void setIconName(String name) {
         String[] splitting;
@@ -56,19 +60,23 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent me) {
-        if (type != null && !type.equals("") && name != null && !name.equals("")) {
+        if (type != null && !type.equals("") && name != null && !name.equals("")) { 
+            dim = Terrain.positionInArray(getMouseX(), getMouseY());
             switch (type) {
                 case "BLOCKS":
-                    Terrain.terrain[1][62].setImage(BlockType.valueOf(name).getImage());
+                    //Terrain.positionInArray(getMouseX(), getMouseY()).setBlockType(BlockType.valueOf(name));
+                    Terrain.terrain[dim.width][dim.height].setBlockType(BlockType.valueOf(name));
                     break;
                 case "INTERACTIVES":
-                    Terrain.terrain[3][62].setImage(Interactives.valueOf(name).getImage());
+                    //Terrain.test(getMouseX(), getMouseY()).setImage(Interactives.valueOf(name).getImage());
                     break;
                 case "DECORATIONS":
-                    Terrain.terrain[5][62].setImage(Decorations.valueOf(name).getImage());
+                    //Terrain.test(getMouseX(), getMouseY()).setImage(Decorations.valueOf(name).getImage());
                     break;
                 case "PLAYERS":
-                    Terrain.terrain[7][62].setImage(Players.valueOf(name).getImage());
+                    Game.player.setPosition(dim);
+                    Player.setImage(Players.valueOf(name).getImage());
+                    //Terrain.test(getMouseX(), getMouseY()).setImage(Players.valueOf(name).getImage());
                     break;
             }
         }

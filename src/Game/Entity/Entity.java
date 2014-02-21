@@ -7,6 +7,8 @@ import static Game.World.HALF_FRAME_X;
 import static Game.World.HALF_FRAME_Y;
 import static Game.World.HALF_TILE;
 import static Game.World.TILE_SIZE;
+import Game.Map.Block;
+import java.awt.Dimension;
 
 public class Entity {
 
@@ -57,5 +59,10 @@ public class Entity {
     
     public void onDestroy() {
         
+    }
+        
+    public void setPosition(Dimension dim) {
+        setX(dim.width);
+        setY(dim.height);
     }
 }

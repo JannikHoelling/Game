@@ -8,6 +8,8 @@ import java.awt.event.KeyEvent;
 import static Game.World.*;
 import java.awt.image.BufferedImage;
 import Game.Enums.Players;
+import Game.Map.Block;
+import java.awt.Dimension;
 
 public class Player extends RigidBody {
 
@@ -15,7 +17,7 @@ public class Player extends RigidBody {
     private final float jumpForce = 750;
     private float dX;
     private float dY;
-    private BufferedImage image;
+    private static BufferedImage image;
 
     private Weapon weapon;
     
@@ -62,13 +64,13 @@ public class Player extends RigidBody {
         
         if(dX < 0) { // Check left side
             if (!Terrain.getBlock(x - HALF_TILE, y - HALF_TILE) || !Terrain.getBlock(x - HALF_TILE, y + HALF_TILE-1)) {
-                x = magic(x) + HALF_TILE;
+                x = Terrain.positionBlock(x) + HALF_TILE;
                 dX = 0;
             }
         }
         if(dX > 0){ // Check right side
             if (!Terrain.getBlock(x + HALF_TILE, y - HALF_TILE) || !Terrain.getBlock(x + HALF_TILE, y + HALF_TILE-1)) {
-                x = magic(x) - HALF_TILE;
+                x = Terrain.positionBlock(x) - HALF_TILE;
                 dX = 0;
             }
         }
@@ -78,13 +80,13 @@ public class Player extends RigidBody {
         
         if(dY < 0) { // Check floor
             if (!Terrain.getBlock(x + HALF_TILE-1, y - HALF_TILE) || !Terrain.getBlock(x - HALF_TILE, y - HALF_TILE)) {
-                y = magic(y) + HALF_TILE;
+                y = Terrain.positionBlock(y) + HALF_TILE;
                 dY = 0;
             }
         }
         if(dY > 0) { // Check ceiling
             if (!Terrain.getBlock(x + HALF_TILE-1, y + HALF_TILE) || !Terrain.getBlock(x - HALF_TILE, y + HALF_TILE)) {
-                y = magic(y) - HALF_TILE;
+                y = Terrain.positionBlock(y) - HALF_TILE;
                 dY = 0;
             }
         }
@@ -122,4 +124,9 @@ public class Player extends RigidBody {
     public void setDY(float dY) {
         this.dY = dY;
     }
+    
+    public static void setImage(BufferedImage image) {
+        Player.image = image;
+    }
+ 
 }
