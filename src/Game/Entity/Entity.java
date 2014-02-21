@@ -2,6 +2,8 @@ package Game.Entity;
 
 import java.awt.Graphics2D;
 import Game.Game;
+import Game.Map.Block;
+import java.awt.Dimension;
 
 public class Entity {
 
@@ -47,5 +49,10 @@ public class Entity {
 
     public void destroy() {
         alive = true;
+    }
+    
+    public void setPosition(Dimension dim) {
+        setX(dim.width);
+        setY(dim.height);
     }
 }

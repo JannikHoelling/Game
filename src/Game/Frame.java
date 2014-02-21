@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 
 import Game.Editor.*;
 import static Game.World.*;
-import javax.swing.JTextField;
 
 public class Frame extends JFrame {
 

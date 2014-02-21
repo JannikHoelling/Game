@@ -1,17 +1,17 @@
 package Game.Map;
 
-import Game.Enums.BlockType;
-import java.awt.image.BufferedImage;
+import Game.Enums.*;
+import java.awt.Image;
 
 
-public class Block {
-    public BufferedImage image = BlockType.AIR.getImage();
+public class Block {   
+    public BlockType blockType = BlockType.AIR;
     
-    public BufferedImage getImage() {
-        return image;
+    public Image getImage() {
+        return blockType.getImage();
     }
     
-    public void setImage(BufferedImage image) {
-        this.image = image;
+    public void setBlockType(BlockType blockType) {
+        this.blockType = blockType;
     }
 }
