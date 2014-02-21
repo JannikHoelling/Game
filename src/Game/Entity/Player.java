@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import Game.Enums.Players;
 
 public class Player extends RigidBody {
 
@@ -22,12 +23,7 @@ public class Player extends RigidBody {
 
     public Player(float x, float y) {
         super(x, y);
-
-        try {
-            image = ImageIO.read(new File("res\\players\\figur.png"));
-        } catch (IOException ex) {
-            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        image = Players.BLUE.getImage();
     }
 
     @Override

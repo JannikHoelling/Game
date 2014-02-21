@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import Game.Game;
 import Game.Input;
-import Game.Map.BlockType;
+import Game.Enums.BlockType;
 import static Game.Game.*;
 import static Game.Map.Terrain.terrain;
 import static Game.World.*;

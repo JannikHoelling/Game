@@ -81,6 +81,7 @@ public class Game implements Runnable {
     }
     
     public void start() {
+        Frame.disableClickable();
         lastLoopTime = System.nanoTime();
         Frame.panel.addKeyListener(input);
         Frame.panel.addMouseMotionListener(input);
@@ -91,6 +92,7 @@ public class Game implements Runnable {
     }
     
     public void stop() {
+        Frame.enableClickable();
         isRunning = false;
     }
     

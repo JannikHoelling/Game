@@ -1,4 +1,4 @@
-package Game.Map;
+package Game.Enums;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 
 public enum BlockType {
@@ -15,12 +17,14 @@ public enum BlockType {
 
     private final String location;
     private BufferedImage image;
+    private ImageIcon icon;
 
     private BlockType(String location) {
         this.location = location;
         
         try {
             image = ImageIO.read(new File(location));
+            this.icon = new ImageIcon(this.location);
         } catch (IOException ex) {
             Logger.getLogger(BlockType.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -29,6 +33,10 @@ public enum BlockType {
     
     public BufferedImage getImage() {
         return image;
+    }
+    
+    public ImageIcon getIcon() {
+        return icon;
     }
 
 }

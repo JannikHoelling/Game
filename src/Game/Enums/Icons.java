@@ -1,4 +1,4 @@
-package Game.Editor;
+package Game.Enums;
 
 import javax.swing.ImageIcon;
 

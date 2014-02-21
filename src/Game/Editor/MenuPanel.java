@@ -1,5 +1,6 @@
 package Game.Editor;
 
+import Game.Enums.Icons;
 import Game.Frame;
 import static Game.Game.fileHandler;
 import java.awt.event.ActionEvent;
@@ -47,7 +48,9 @@ public class MenuPanel extends JPanel implements ActionListener {
 
     public MenuPanel() {
         menu();
-        tools();     
+        tools();  
+        System.out.println(getBounds());
+        this.setSize(this.getWidth(), this.getHeight());
     }
 
     @Override
@@ -126,6 +129,7 @@ public class MenuPanel extends JPanel implements ActionListener {
         help.add(about);
         
         menubar.setAlignmentX(0);
+        menubar.setEnabled(false);
     }
 
     private void tools() {
@@ -140,7 +144,17 @@ public class MenuPanel extends JPanel implements ActionListener {
         toolbar.add(cmdRun);
 
         toolbar.setBorder(new EtchedBorder());
-        toolbar.setAlignmentX(0);
+        toolbar.setAlignmentX(0);        
+    }
+    
+    public void enabled() {
+        for(int i=0; i<menubar.getComponentCount(); i++) {
+            menubar.getComponent(i).setEnabled(!menubar.getComponent(i).isEnabled());
+        }
+        for(int i=0; i<toolbar.getComponentCount(); i++) {
+            toolbar.getComponent(i).setEnabled(!toolbar.getComponent(i).isEnabled());
+        }
+        cmdRun.setEnabled(true);
     }
 
 

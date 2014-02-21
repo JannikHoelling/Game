@@ -1,5 +1,6 @@
 package Game.Map;
 
+import Game.Enums.BlockType;
 import Game.Renderer;
 import java.awt.Graphics2D;
 import java.util.Random;
@@ -18,7 +19,7 @@ public class Terrain {
         randomMap();
         bounds = new Rectangle(0, 0, WORLD_X * TILE_SIZE, WORLD_Y * TILE_SIZE);
     }
-
+   
     public void render(Graphics2D g) {
         for (int x = 0; x < terrain.length; x++) {
             for (int y = 0; y < terrain[0].length; y++) {

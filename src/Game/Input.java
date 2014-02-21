@@ -40,7 +40,9 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
     }
 
     @Override
-    public void mouseClicked(MouseEvent me) {}
+    public void mouseClicked(MouseEvent me) {
+        
+    }
 
     @Override
     public void mousePressed(MouseEvent me) {
