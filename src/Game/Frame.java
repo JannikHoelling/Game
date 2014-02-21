@@ -18,11 +18,11 @@ public class Frame extends JFrame {
 
     public static MenuPanel menuPanel = new MenuPanel();
 
-    private final JPanel gamePanel = new JPanel(); //panel for the game (position)
+    private final JPanel panel = new JPanel(); //panel for the game (position)
     private final JPanel edPanel = new JPanel(); //panel for the game (position)
     private final GridLayout layout = new GridLayout(0, 5, 1, 1);
 
-    public static GamePanel panel = new GamePanel();
+    public static GamePanel gamePanel = new GamePanel();
     public static EditorPanel editorPanel = new EditorPanel();
     
     private final Input input = new Input();
@@ -32,28 +32,28 @@ public class Frame extends JFrame {
         this.setSize(FRAME_X, FRAME_Y);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.panel.setDoubleBuffered(true);
-        
         //this.closeWindows();
+        
+        gamePanel.validate();
 
         FileHandler.createFolder(); //create save-Folder
 
         if (args.equals("-editor")) {
             this.setTitle("Hunting Animals - Editor");
-            gamePanel.setLayout(new BorderLayout());
-            gamePanel.setBorder(BorderFactory.createEtchedBorder());
-            gamePanel.add(panel);
+            panel.setLayout(new BorderLayout());
+            panel.setBorder(BorderFactory.createEtchedBorder());
+            panel.add(gamePanel);
 
             menuPanel.setLayout(layout);
             this.setJMenuBar(menuPanel.menubar);
-            this.add(gamePanel, BorderLayout.CENTER);
+            this.add(panel, BorderLayout.CENTER);
             this.add(menuPanel.toolbar, BorderLayout.NORTH);
             this.add(editorPanel, BorderLayout.WEST);
             this.pack();
         } else {
             this.setTitle("Hunting Animals - Game");
             this.initVar();
-            this.add(panel);
+            this.add(gamePanel);
             GamePanel.game.start();
         }
         this.addComponentListener(new FrameListener());
@@ -87,17 +87,17 @@ public class Frame extends JFrame {
     }
     
     private void setListener() {
-        panel.addKeyListener(input);
-        panel.addMouseMotionListener(input);
-        panel.addMouseListener(input);
+        gamePanel.addKeyListener(input);
+        gamePanel.addMouseMotionListener(input);
+        gamePanel.addMouseListener(input);
     }
 
     private class FrameListener implements ComponentListener {
 
         @Override
         public void componentResized(ComponentEvent ce) {
-            FRAME_X = panel.getWidth();
-            FRAME_Y = panel.getHeight();
+            FRAME_X = gamePanel.getWidth();
+            FRAME_Y = gamePanel.getHeight();
         }
 
         @Override

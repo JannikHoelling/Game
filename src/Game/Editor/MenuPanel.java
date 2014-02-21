@@ -44,7 +44,7 @@ public class MenuPanel extends JPanel implements ActionListener {
     private final JButton cmdRedo = new JButton(Icons.REDO.getIcon());
     private final JButton cmdRun = new JButton(Icons.START.getIcon());
 
-    //private GamePanel panel1 = new GamePanel();
+    //private GamePanel panel = new GamePanel();
 
     public MenuPanel() {
         menu();

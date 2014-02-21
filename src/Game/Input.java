@@ -1,5 +1,6 @@
 package Game;
 
+import Game.Editor.GamePanel;
 import Game.Editor.Tab;
 import Game.Entity.Player;
 import Game.Enums.*;
@@ -11,6 +12,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Input implements KeyListener, MouseMotionListener, MouseListener {
 
@@ -21,7 +24,7 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
 
     private static String name = "";
     private static String type = "";
-    
+
     Dimension dim = new Dimension();
 
     public static void setIconName(String name) {
@@ -50,6 +53,7 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
     public void mouseDragged(MouseEvent me) {
         mouseX = me.getX();
         mouseY = me.getY();
+        this.paintEditor();
     }
 
     @Override
@@ -60,29 +64,9 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent me) {
-        if (type != null && !type.equals("") && name != null && !name.equals("")) { 
-            dim = Terrain.positionInArray(getMouseX(), getMouseY());
-            switch (type) {
-                case "BLOCKS":
-                    //Terrain.positionInArray(getMouseX(), getMouseY()).setBlockType(BlockType.valueOf(name));
-                    Terrain.terrain[dim.width][dim.height].setBlockType(BlockType.valueOf(name));
-                    break;
-                case "INTERACTIVES":
-                    //Terrain.test(getMouseX(), getMouseY()).setImage(Interactives.valueOf(name).getImage());
-                    break;
-                case "DECORATIONS":
-                    //Terrain.test(getMouseX(), getMouseY()).setImage(Decorations.valueOf(name).getImage());
-                    break;
-                case "PLAYERS":
-                    Game.player.setPosition(dim);
-                    Player.setImage(Players.valueOf(name).getImage());
-                    //Terrain.test(getMouseX(), getMouseY()).setImage(Players.valueOf(name).getImage());
-                    break;
-            }
-        }
-        Frame.panel.repaint();
+
     }
-    
+
     public static void setNull() {
         Input.name = "";
         Input.type = "";
@@ -91,6 +75,7 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
     @Override
     public void mousePressed(MouseEvent me) {
         mouseClicked = true;
+        this.paintEditor();
     }
 
     @Override
@@ -112,5 +97,27 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
 
     public static int getMouseY() {
         return mouseY - World.HALF_FRAME_Y + Camera.y;
+    }
+
+    public void paintEditor() {
+        if (type != null && !type.equals("") && name != null && !name.equals("")) {
+            dim = Terrain.positionInArray(getMouseX(), getMouseY());
+            switch (type) {
+                case "BLOCKS":
+                    Terrain.terrain[dim.width][dim.height].setBlockType(BlockType.valueOf(name));
+                    break;
+                case "INTERACTIVES":
+                    break;
+                case "DECORATIONS":
+                    break;
+                case "PLAYERS":
+                    Game.player.setX(Terrain.positionBlock(getMouseX()));
+                    Game.player.setY(Terrain.positionBlock(getMouseY()));
+                    Player.setImage(Players.valueOf(name).getImage());
+                    break;
+            }
+        }
+        Frame.gamePanel.repaint();
+
     }
 }

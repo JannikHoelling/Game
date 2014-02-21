@@ -71,7 +71,7 @@ public class Game implements Runnable {
             // will be used to calculate how far the entities should
             // move this loop
             
-            Frame.panel.requestFocusInWindow(); //focus on game panel
+            Frame.gamePanel.requestFocusInWindow(); //focus on game panel
             fileHandler.update(); //check keyinput in fileHandler
             
             long now = System.nanoTime();
@@ -81,8 +81,7 @@ public class Game implements Runnable {
             
             update(delta);             
 
-            //Frame.panel.paintImmediately(0,0,GAME_X ,GAME_Y);
-            Frame.panel.repaint();
+            Frame.gamePanel.paintImmediately(0,0,GAME_X ,GAME_Y);
             
             
             timePerFrame = ((float)(System.nanoTime() - lastLoopTime) / 1000000);
