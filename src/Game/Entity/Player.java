@@ -1,7 +1,7 @@
 package Game.Entity;
 
 import Game.*;
-import Game.Weapons.Weapon;
+import Game.Weapons.*;
 import Game.Map.Terrain;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
