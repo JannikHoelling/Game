@@ -16,7 +16,6 @@ public class Game implements Runnable {
     
     public static Terrain terrain;
     public static Player player;
-    private final Input input = new Input();
     
     public static FileHandler fileHandler;
     
@@ -30,7 +29,9 @@ public class Game implements Runnable {
         terrain = new Terrain();
         fileHandler = new FileHandler();
         player = new Player(0, 0);
-        //entities.add(player);       
+        //entities.add(player);  
+        
+        
     }
     
     public void update(double delta) {
@@ -81,11 +82,9 @@ public class Game implements Runnable {
     }
     
     public void start() {
+        Input.setNull();
         Frame.disableClickable();
         lastLoopTime = System.nanoTime();
-        Frame.panel.addKeyListener(input);
-        Frame.panel.addMouseMotionListener(input);
-        Frame.panel.addMouseListener(input);
 
         isRunning = true;
         new Thread(this).start();

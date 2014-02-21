@@ -148,7 +148,7 @@ public class FileHandler {
         //write into file
         for (int x = 0; x < WORLD_X; x++) {
             for (int y = 0; y < WORLD_Y; y++) {
-                f.format("%d %d %s\n", x, y, terrain[x][y].blockType.name());
+                //f.format("%d %d %s\n", x, y, terrain[x][y].blockType.name());
             }
         }
 
@@ -164,7 +164,7 @@ public class FileHandler {
             String type = sc.next();
 
             if (!type.equals("Player")) {
-                terrain[(int) x][(int) y].blockType = BlockType.valueOf(type);
+                //terrain[(int) x][(int) y].blockType = BlockType.valueOf(type);
             } else {
                 float dX = sc.nextFloat();
                 float dY = sc.nextFloat();

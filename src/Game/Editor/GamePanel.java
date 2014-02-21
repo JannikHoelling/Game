@@ -44,7 +44,7 @@ public class GamePanel extends JPanel {
         g.drawString("Main: " + Game.timePerFrame + "ms", 0, 18);
         g.drawString("Entities: " + Game.entities.size(), 0, 18 * 2);
         g.drawString("Camera: " + Camera.x + "|" + Camera.y, 0, 18 * 3);
-        g.drawString("Mouse: " + Input.getMouseX() + "|" + Input.getMouseX(), 0, 18 * 4);
+        g.drawString("Mouse: " + Input.getMouseX() + "|" + Input.getMouseY(), 0, 18 * 4);
 
     }
 }

@@ -25,6 +25,8 @@ public class Frame extends JFrame {
 
     public static GamePanel panel = new GamePanel();
     public static EditorPanel editorPanel = new EditorPanel();
+    
+    private final Input input = new Input();
 
     public Frame(String args) {
         this.pack();
@@ -54,6 +56,7 @@ public class Frame extends JFrame {
             GamePanel.game.start();
         }
         this.addComponentListener(new FrameListener());
+        this.setListener();
         this.setVisible(true);
     }
 
@@ -80,6 +83,12 @@ public class Frame extends JFrame {
             case JOptionPane.NO_OPTION:
                 System.exit(0);
         }
+    }
+    
+    private void setListener() {
+        panel.addKeyListener(input);
+        panel.addMouseMotionListener(input);
+        panel.addMouseListener(input);
     }
 
     private class FrameListener implements ComponentListener {

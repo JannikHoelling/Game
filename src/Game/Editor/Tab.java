@@ -1,6 +1,7 @@
 package Game.Editor;
 
 import Game.Enums.*;
+import Game.Input;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -54,6 +55,7 @@ public class Tab  extends JPanel{
         BlockType[] blocks = BlockType.values();
         for(int i=0; i<BlockType.values().length; i++) {
             list.add(new JLabel(blocks[i].getIcon()));
+            list.get(list.size()-1).setName(blocks[i].name() + "-BLOCKS");
             add(list.get(list.size()-1));
         }
         for(int i=0; i<48-BlockType.values().length; i++) {
@@ -65,6 +67,7 @@ public class Tab  extends JPanel{
         Decorations[] decorations = Decorations.values();
         for(int i=0; i<Decorations.values().length; i++) {
             list.add(new JLabel(decorations[i].getIcon()));
+            list.get(list.size()-1).setName(decorations[i].name() + "-DECORATIONS");
             add(list.get(list.size()-1));
         }
         for(int i=0; i<48-BlockType.values().length; i++) {
@@ -76,7 +79,9 @@ public class Tab  extends JPanel{
         Interactives[] interactives = Interactives.values();
         for(int i=0; i<Interactives.values().length; i++) {
             list.add(new JLabel(interactives[i].getIcon()));
+            list.get(list.size()-1).setName(interactives[i].name() + "-INTERACTIVES");
             add(list.get(list.size()-1));
+            
         }
         for(int i=0; i<48-BlockType.values().length; i++) {
             add(new JLabel(new ImageIcon("res\\null.png")));
@@ -87,6 +92,7 @@ public class Tab  extends JPanel{
         Players[] players = Players.values();
         for(int i=0; i<Players.values().length; i++) {
             list.add(new JLabel(players[i].getIcon()));
+            list.get(list.size()-1).setName(players[i].name() + "-PLAYERS");
             add(list.get(list.size()-1));
         }
         for(int i=0; i<48-BlockType.values().length; i++) {
@@ -107,12 +113,10 @@ public class Tab  extends JPanel{
         {
             for(int i=0; i<list.size(); i++) {
                 if(e.getSource().equals(list.get(i))) {
-                    System.out.println("Das war label "+i);
+                    Input.setIconName(list.get(i).getName());
                     return;
                 }   
-           }
-            
-
+           }          
         }
     }
 }

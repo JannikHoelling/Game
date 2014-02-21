@@ -49,7 +49,6 @@ public class MenuPanel extends JPanel implements ActionListener {
     public MenuPanel() {
         menu();
         tools();  
-        System.out.println(getBounds());
         this.setSize(this.getWidth(), this.getHeight());
     }
 
