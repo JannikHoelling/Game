@@ -2,6 +2,11 @@ package Game.Entity;
 
 import java.awt.Graphics2D;
 import Game.Game;
+import Game.Renderer;
+import static Game.World.HALF_FRAME_X;
+import static Game.World.HALF_FRAME_Y;
+import static Game.World.HALF_TILE;
+import static Game.World.TILE_SIZE;
 
 public class Entity {
 
@@ -22,7 +27,8 @@ public class Entity {
     }
 
     public void render(Graphics2D g) {
-        g.fillOval((int) x - 5, (int) y - 5, 10, 10);
+        g.fillOval((int) x + Renderer.offsetX() - HALF_TILE, (int) y + Renderer.offsetY() - HALF_TILE, 4, 4);
+        g.drawRect((int) x + Renderer.offsetX() - TILE_SIZE, (int) y + Renderer.offsetY() - TILE_SIZE, TILE_SIZE-1, TILE_SIZE-1);
     }
     
     public float getX() {
@@ -47,5 +53,9 @@ public class Entity {
 
     public void destroy() {
         alive = true;
+    }
+    
+    public void onDestroy() {
+        
     }
 }

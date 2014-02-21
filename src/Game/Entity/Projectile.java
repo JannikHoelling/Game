@@ -10,11 +10,14 @@ public class Projectile extends Entity {
     private final float dX, dY;
     private final double creationTime;
     
-    public Projectile(float x, float y, float dX, float dY) {
+    private boolean explode = false;
+    
+    public Projectile(float x, float y, float dX, float dY, boolean explode) {
         super(x, y);
 
         this.dX = dX;
         this.dY = dY;
+        this.explode = explode;
 
         creationTime = Game.time;
     }
@@ -32,6 +35,13 @@ public class Projectile extends Entity {
         else {
             x += dX * delta;
             y += dY * delta;
+        }
+    }
+    
+    @Override
+    public void onDestroy() {
+        if(explode) {
+            SpawnTools.spawnExplosion(x, y, 250f);
         }
     }
 }

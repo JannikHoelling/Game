@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 
 import Game.Editor.*;
 import static Game.World.*;
-import javax.swing.JTextField;
 
 public class Frame extends JFrame {
 
@@ -33,6 +32,8 @@ public class Frame extends JFrame {
         this.setSize(FRAME_X, FRAME_Y);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.panel.setDoubleBuffered(true);
+        
         //this.closeWindows();
 
         FileHandler.createFolder(); //create save-Folder

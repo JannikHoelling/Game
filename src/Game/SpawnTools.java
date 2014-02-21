@@ -14,7 +14,7 @@ public class SpawnTools {
      * @param force speed with that the projectile is spawned in pixel/sec
      */
     
-    public static void spawnProjectile(float xFrom, float yFrom, float xTo, float yTo, float force) {
+    public static void spawnProjectile(float xFrom, float yFrom, float xTo, float yTo, float force, boolean explode) {
         // Direction
         float dX = xTo - xFrom;
         float dY = yTo - yFrom;
@@ -25,7 +25,7 @@ public class SpawnTools {
         dX /= length;
         dY /= length;
         
-        Game.entities.add(new Projectile(xFrom, yFrom, dX * force, dY * force));
+        Game.entities.add(new Projectile(xFrom, yFrom, dX * force, dY * force, explode));
     }
     
     /**
@@ -39,7 +39,7 @@ public class SpawnTools {
         
         Random rand = new Random();
         
-        int shots = 60;
+        int shots = 20;
         // Convert the degrees to Radians
         float degree = 360f / shots;
         float radian = (float) ((Math.PI/180.0) * degree);
@@ -53,7 +53,7 @@ public class SpawnTools {
             float x = (float) Math.cos(i * radian + randPosition) + xFrom;
             float y = (float) Math.sin(i * radian + randPosition) + yFrom;
             
-            spawnProjectile(xFrom, yFrom, x, y, force + randSpeed);
+            spawnProjectile(xFrom, yFrom, x, y, force + randSpeed, false);
         }
     }
 }

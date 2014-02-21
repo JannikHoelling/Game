@@ -12,7 +12,7 @@ import static Game.World.*;
 public class Game implements Runnable {
     
     public static ArrayList<Entity> entities = new ArrayList<>(); 
-    public static ArrayList<RigidBody> collider = new ArrayList<>();
+    public static ArrayList<RigidBody> rigidBodies = new ArrayList<>();
     
     public static Terrain terrain;
     public static Player player;
@@ -29,9 +29,11 @@ public class Game implements Runnable {
         terrain = new Terrain();
         fileHandler = new FileHandler();
         player = new Player(0, 0);
-        //entities.add(player);  
+        //entities.add(player);
         
-        
+        Teleporter t1 = new Teleporter(255, 255, null);
+        Teleporter t2 = new Teleporter(500, 255, t1);
+        t1.setTarget(t2);
     }
     
     public void update(double delta) {
@@ -42,9 +44,21 @@ public class Game implements Runnable {
             
             if(!e.isAlive())
                 e.update((float) delta);
-            else
+            else {
+                e.onDestroy();
                 entities.remove(i);
+            }
         }
+        
+        for (int i = 0; i < rigidBodies.size(); i++) {
+            RigidBody e = rigidBodies.get(i);
+            
+            if(e.getBounds().intersects(player.getBounds()) && e != player) {
+                e.onCollision();
+            }
+            
+        }
+        
         time += delta;
     }
     
@@ -67,7 +81,9 @@ public class Game implements Runnable {
             
             update(delta);             
 
-            Frame.panel.paintImmediately(0,0,GAME_X ,GAME_Y);
+            //Frame.panel.paintImmediately(0,0,GAME_X ,GAME_Y);
+            Frame.panel.repaint();
+            
             
             timePerFrame = ((float)(System.nanoTime() - lastLoopTime) / 1000000);
             

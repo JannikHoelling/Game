@@ -1,16 +1,12 @@
 package Game.Entity;
 
 import Game.*;
+import Game.Weapons.Weapon;
 import Game.Map.Terrain;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import static Game.World.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import Game.Enums.Players;
 
 public class Player extends RigidBody {
@@ -21,9 +17,12 @@ public class Player extends RigidBody {
     private float dY;
     private BufferedImage image;
 
+    private Weapon weapon;
+    
     public Player(float x, float y) {
         super(x, y);
         image = Players.BLUE.getImage();
+        weapon = new Weapon();
     }
 
     @Override
@@ -92,7 +91,8 @@ public class Player extends RigidBody {
 
         
         if (Input.mouseClicked) {
-            SpawnTools.spawnProjectile(x, y, Input.getMouseX(), Input.getMouseY(), 500f);
+            //SpawnTools.spawnProjectile(x, y, Input.getMouseX(), Input.getMouseY(), 500f);
+            weapon.shoot(x, y, Input.getMouseX(), Input.getMouseY());
         }
         if (Input.keys[KeyEvent.VK_ALT]) {
 
@@ -106,8 +106,6 @@ public class Player extends RigidBody {
     public int magic(float value) {       
         return ((int) Math.ceil((value - HALF_TILE) / TILE_SIZE)) * TILE_SIZE;
     }
-    
-    
     
     public float getDX() {
         return dX;
