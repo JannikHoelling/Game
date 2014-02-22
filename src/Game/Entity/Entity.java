@@ -9,13 +9,15 @@ import static Game.World.HALF_TILE;
 import static Game.World.TILE_SIZE;
 import Game.Map.Block;
 import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 
 public class Entity {
 
     protected float x;
     protected float y;
-
+    
     private boolean alive = false;
+    protected BufferedImage image;
 
     public Entity(float x, float y) {
         this.x = x;
@@ -64,5 +66,9 @@ public class Entity {
     public void setPosition(Dimension dim) {
         setX(dim.width);
         setY(dim.height);
+    }
+    
+    public void setImage(BufferedImage image) {
+        this.image = image;
     }
 }

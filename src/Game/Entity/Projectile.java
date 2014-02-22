@@ -9,8 +9,8 @@ public class Projectile extends Entity {
 
     private final float dX, dY;
     private final double creationTime;
-    
-    private boolean explode = false;
+     
+     private boolean explode = false;
     
     public Projectile(float x, float y, float dX, float dY, boolean explode) {
         super(x, y);
@@ -43,5 +43,5 @@ public class Projectile extends Entity {
         if(explode) {
             SpawnTools.spawnExplosion(x, y, 250f);
         }
-    }
+    } 
 }

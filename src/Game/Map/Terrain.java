@@ -74,18 +74,6 @@ public class Terrain {
         return ((int) Math.ceil((value - HALF_TILE) / TILE_SIZE)) * TILE_SIZE;
     }
     
-//    public static Block positionInArray(float x, float y) {
-//        x += TILE_SIZE * WORLD_X / 2;
-//        y += TILE_SIZE * WORLD_Y / 2;
-//
-//        x /= TILE_SIZE;
-//        y /= TILE_SIZE;
-//
-//        int xPosition = (int) x;
-//        int yPosition = (int) y;
-//        return terrain[xPosition][yPosition];
-//    }
-    
     public static Dimension positionInArray(float x, float y) {
         x += TILE_SIZE * WORLD_X / 2;
         y += TILE_SIZE * WORLD_Y / 2;

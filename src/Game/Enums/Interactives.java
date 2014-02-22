@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 
 
 public enum Interactives {
-    BOX("res\\interactives\\box.png"), TREE("res\\interactives\\tree.png"), BUCK("res\\interactives\\buck.png"), ROCK("res\\interactives\\rock.png");
+    BOX("res\\interactives\\box.png"), TELEPORT("res\\interactives\\teleport.png");
     private final String location;
     private ImageIcon icon;
     private BufferedImage image;

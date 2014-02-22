@@ -17,7 +17,6 @@ public class Player extends RigidBody {
     private final float jumpForce = 750;
     private float dX;
     private float dY;
-    private static BufferedImage image;
 
     private Weapon weapon;
     
@@ -123,10 +122,6 @@ public class Player extends RigidBody {
     
     public void setDY(float dY) {
         this.dY = dY;
-    }
-    
-    public static void setImage(BufferedImage image) {
-        Player.image = image;
-    }
+    }    
  
 }

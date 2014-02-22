@@ -1,11 +1,14 @@
-Main: initVar() - richtige Werte/Groesse richtig anpassen
 this.
-EditorPanel: panelChanger
 HotKeys
 	strg+s
 	strg+z
 	strg+y
 Grid
+Abfangen:
+	nur ein Teleport
+	Block auf Block / Teleport auf Block/Teleport
+save und map
+startbild, auswahl
 
 
 Bilder

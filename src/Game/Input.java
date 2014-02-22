@@ -1,8 +1,8 @@
 package Game;
 
 import Game.Editor.GamePanel;
-import Game.Editor.Tab;
 import Game.Entity.Player;
+import Game.Entity.Teleporter;
 import Game.Enums.*;
 import Game.Map.Terrain;
 import static Game.World.*;
@@ -12,8 +12,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Input implements KeyListener, MouseMotionListener, MouseListener {
 
@@ -102,22 +100,40 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
     public void paintEditor() {
         if (type != null && !type.equals("") && name != null && !name.equals("")) {
             dim = Terrain.positionInArray(getMouseX(), getMouseY());
-            switch (type) {
-                case "BLOCKS":
-                    Terrain.terrain[dim.width][dim.height].setBlockType(BlockType.valueOf(name));
-                    break;
-                case "INTERACTIVES":
-                    break;
-                case "DECORATIONS":
-                    break;
-                case "PLAYERS":
-                    Game.player.setX(Terrain.positionBlock(getMouseX()));
-                    Game.player.setY(Terrain.positionBlock(getMouseY()));
-                    Player.setImage(Players.valueOf(name).getImage());
-                    break;
+            if (dim.width < WORLD_X - 1 && dim.width > 0 && dim.height < WORLD_Y - 1 && dim.height > 0) {
+                switch (type) {
+                    case "BLOCKS":
+                        Terrain.terrain[dim.width][dim.height].setBlockType(BlockType.valueOf(name));
+                        break;
+                    case "INTERACTIVES":
+                        if (name.equals(Interactives.TELEPORT.name())) {
+                            if (Game.teleporter.isEmpty() || Game.teleporter.get(Game.teleporter.size() - 1).getSet()) {
+                                new Teleporter(Terrain.positionBlock(getMouseX()), Terrain.positionBlock(getMouseY()), null);
+                                Game.setReady(false);
+                                Game.teleporter.get(Game.teleporter.size() - 1).setNumber(Game.teleporter.size()/2);
+                                mouseClicked = false;
+                            }
+
+                            if (mouseClicked && !Game.teleporter.get(Game.teleporter.size()-1).getSet()) {
+                                new Teleporter(Terrain.positionBlock(getMouseX()), Terrain.positionBlock(getMouseY()), Game.teleporter.get(Game.teleporter.size() - 1));
+                                Game.teleporter.get(Game.teleporter.size() - 2).setTarget(Game.teleporter.get(Game.teleporter.size() - 1));
+                                Game.setReady(true);
+                                mouseClicked = false;
+                            }
+                        }
+                        break;
+                    case "DECORATIONS":
+                        break;
+                    case "PLAYERS":
+                        Game.player.setX(Terrain.positionBlock(getMouseX()));
+                        Game.player.setY(Terrain.positionBlock(getMouseY()));
+                        Game.player.setImage(Players.valueOf(name).getImage());
+                        Game.player.update(0);
+                        break;
+                }
             }
+            Frame.gamePanel.repaint();
         }
-        Frame.gamePanel.repaint();
 
     }
 }

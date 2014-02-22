@@ -2,6 +2,7 @@ package Game.Editor;
 
 import Game.Enums.Icons;
 import Game.Frame;
+import Game.Game;
 import static Game.Game.fileHandler;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,26 +19,26 @@ public class MenuPanel extends JPanel implements ActionListener {
 
     public JMenuBar menubar = new JMenuBar();
     public JToolBar toolbar = new JToolBar();
-    
+
     //menu file
     private final JMenu file = new JMenu("File");
     private final JMenu options = new JMenu("Options");
     private final JMenu help = new JMenu("Help");
-    
+
     //items file
     private final JMenuItem newFile = new JMenuItem("New", Icons.NEW.getIcon());
     private final JMenuItem save = new JMenuItem("Save", Icons.SAVE.getIcon());
     private final JMenuItem saveAs = new JMenuItem("Save As..", Icons.SAVEAS.getIcon());
     private final JMenuItem load = new JMenuItem("Load", Icons.LOAD.getIcon());
     private final JMenuItem exit = new JMenuItem("Exit", Icons.EXIT.getIcon());
-    
+
     //items settings
     private final JMenuItem settings = new JMenuItem("Settings", Icons.SETTINGS.getIcon());
-    
+
     //items help
     private final JMenuItem faq = new JMenuItem("FAQ", Icons.FAQ.getIcon());
     private final JMenuItem about = new JMenuItem("About", Icons.ABOUT.getIcon());
-    
+
     //items toolbar
     private final JButton cmdSave = new JButton(Icons.SAVE.getIcon());
     private final JButton cmdUndo = new JButton(Icons.UNDO.getIcon());
@@ -45,10 +46,9 @@ public class MenuPanel extends JPanel implements ActionListener {
     private final JButton cmdRun = new JButton(Icons.START.getIcon());
 
     //private GamePanel panel = new GamePanel();
-
     public MenuPanel() {
         menu();
-        tools();  
+        tools();
         this.setSize(this.getWidth(), this.getHeight());
     }
 
@@ -88,13 +88,17 @@ public class MenuPanel extends JPanel implements ActionListener {
             JOptionPane.showMessageDialog(null, "REDO", "REDO", JOptionPane.INFORMATION_MESSAGE);
         }
         if (e.getSource() == cmdRun) {
-            if (cmdRun.getIcon() == Icons.START.getIcon()) {
-                GamePanel.game.start();
-                cmdRun.setIcon(Icons.STOP.getIcon());
-                
+            if (Game.getReady()) {
+                if (cmdRun.getIcon() == Icons.START.getIcon()) {
+                    GamePanel.game.start();
+                    cmdRun.setIcon(Icons.STOP.getIcon());
+
+                } else {
+                    GamePanel.game.stop();
+                    cmdRun.setIcon(Icons.START.getIcon());
+                }
             } else {
-                GamePanel.game.stop();
-                cmdRun.setIcon(Icons.START.getIcon());
+                JOptionPane.showMessageDialog(null, "Nicht alles ist gesetzt!", "WARNING", JOptionPane.WARNING_MESSAGE);
             }
         }
     }
@@ -126,7 +130,7 @@ public class MenuPanel extends JPanel implements ActionListener {
 
         help.add(faq);
         help.add(about);
-        
+
         menubar.setAlignmentX(0);
         menubar.setEnabled(false);
     }
@@ -143,18 +147,16 @@ public class MenuPanel extends JPanel implements ActionListener {
         toolbar.add(cmdRun);
 
         toolbar.setBorder(new EtchedBorder());
-        toolbar.setAlignmentX(0);        
+        toolbar.setAlignmentX(0);
     }
-    
+
     public void enabled() {
-        for(int i=0; i<menubar.getComponentCount(); i++) {
+        for (int i = 0; i < menubar.getComponentCount(); i++) {
             menubar.getComponent(i).setEnabled(!menubar.getComponent(i).isEnabled());
         }
-        for(int i=0; i<toolbar.getComponentCount(); i++) {
+        for (int i = 0; i < toolbar.getComponentCount(); i++) {
             toolbar.getComponent(i).setEnabled(!toolbar.getComponent(i).isEnabled());
         }
         cmdRun.setEnabled(true);
     }
-
-
 }
