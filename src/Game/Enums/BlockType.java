@@ -13,7 +13,7 @@ import javax.swing.ImageIcon;
 public enum BlockType {
 
     AIR("res\\blocks\\air.png"), DIRT("res\\blocks\\dirt.png"), DIRT_FULL("res\\blocks\\dirt_full.png"), 
-    GRASS("res\\blocks\\grass.png");
+    GRASS("res\\blocks\\grass.png"), NULL("res\\null.png");
 
     private final String location;
     private BufferedImage image;

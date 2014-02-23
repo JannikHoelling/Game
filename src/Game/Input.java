@@ -24,6 +24,8 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
     private static String type = "";
 
     Dimension dim = new Dimension();
+    Dimension dimMouse = new Dimension();
+    Dimension dimEntity = new Dimension();
 
     public static void setIconName(String name) {
         String[] splitting;
@@ -39,7 +41,7 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
 
     @Override
     public void keyPressed(KeyEvent ke) {
-        keys[ke.getKeyCode()] = true;
+        keys[ke.getKeyCode()] = true;        
     }
 
     @Override
@@ -99,26 +101,46 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
 
     public void paintEditor() {
         if (type != null && !type.equals("") && name != null && !name.equals("")) {
-            dim = Terrain.positionInArray(getMouseX(), getMouseY());
+            dimMouse = new Dimension(getMouseX(), getMouseY());
+            dim = Terrain.positionInArray(dimMouse.width, dimMouse.height);
             if (dim.width < WORLD_X - 1 && dim.width > 0 && dim.height < WORLD_Y - 1 && dim.height > 0) {
                 switch (type) {
                     case "BLOCKS":
-                        Terrain.terrain[dim.width][dim.height].setBlockType(BlockType.valueOf(name));
+                        if (!Terrain.terrain[dim.width][dim.height].blockType.equals(BlockType.valueOf(name))) {
+                            Terrain.terrain[dim.width][dim.height].setBlockType(BlockType.valueOf(name));
+                        }
                         break;
                     case "INTERACTIVES":
                         if (name.equals(Interactives.TELEPORT.name())) {
-                            if (Game.teleporter.isEmpty() || Game.teleporter.get(Game.teleporter.size() - 1).getSet()) {
-                                new Teleporter(Terrain.positionBlock(getMouseX()), Terrain.positionBlock(getMouseY()), null);
-                                Game.setReady(false);
-                                Game.teleporter.get(Game.teleporter.size() - 1).setNumber(Game.teleporter.size()/2);
-                                mouseClicked = false;
-                            }
+                            if ((Terrain.terrain[dim.width][dim.height].blockType == BlockType.AIR && !isEntityOnPosition(Terrain.positionBlock(dimMouse.width), Terrain.positionBlock(dimMouse.height)))) {
+                                if (Game.teleporter.isEmpty() || Game.teleporter.get(Game.teleporter.size() - 1).getSet()) {
+                                    new Teleporter(Terrain.positionBlock(dimMouse.width), Terrain.positionBlock(dimMouse.height), null);
 
-                            if (mouseClicked && !Game.teleporter.get(Game.teleporter.size()-1).getSet()) {
-                                new Teleporter(Terrain.positionBlock(getMouseX()), Terrain.positionBlock(getMouseY()), Game.teleporter.get(Game.teleporter.size() - 1));
-                                Game.teleporter.get(Game.teleporter.size() - 2).setTarget(Game.teleporter.get(Game.teleporter.size() - 1));
-                                Game.setReady(true);
-                                mouseClicked = false;
+                                    Game.setReady(false);
+                                    Game.teleporter.get(Game.teleporter.size() - 1).setNumber(Game.teleporter.size() / 2);
+                                    mouseClicked = false;
+                                }
+
+                                if (mouseClicked && !Game.teleporter.get(Game.teleporter.size() - 1).getSet()) {
+                                    new Teleporter(Terrain.positionBlock(dimMouse.width), Terrain.positionBlock(dimMouse.height), Game.teleporter.get(Game.teleporter.size() - 1));
+                                    Game.teleporter.get(Game.teleporter.size() - 2).setTarget(Game.teleporter.get(Game.teleporter.size() - 1));
+                                    Game.setReady(true);
+                                    mouseClicked = false;
+                                }
+
+                                dimEntity = Terrain.positionInArray(Game.teleporter.get(Game.teleporter.size() - 1).getX(), Game.teleporter.get(Game.teleporter.size() - 1).getY());
+                                if (Terrain.terrain[dimEntity.width][dimEntity.height].blockType != BlockType.AIR) {
+                                    if (Game.teleporter.size() == 1) {
+                                        if (dimEntity.width > dim.width) {
+                                            Game.teleporter.get(Game.teleporter.size() - 1).setX(Terrain.positionBlock(Game.teleporter.get(Game.teleporter.size() - 1).getX() - TILE_SIZE));
+                                        } else {
+                                            Game.teleporter.get(Game.teleporter.size() - 1).setY(Terrain.positionBlock(Game.teleporter.get(Game.teleporter.size() - 1).getY() - TILE_SIZE));
+                                        }
+                                    } else {
+                                        Game.teleporter.get(Game.teleporter.size() - 1).destroy();
+                                        Game.teleporter.remove(Game.teleporter.size() - 1);
+                                    }
+                                }
                             }
                         }
                         break;
@@ -128,12 +150,22 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
                         Game.player.setX(Terrain.positionBlock(getMouseX()));
                         Game.player.setY(Terrain.positionBlock(getMouseY()));
                         Game.player.setImage(Players.valueOf(name).getImage());
-                        Game.player.update(0);
                         break;
                 }
             }
+            GamePanel.game.update(0);
             Frame.gamePanel.repaint();
         }
 
     }
+
+    public boolean isEntityOnPosition(float x, float y) {
+        for (int i = 0; i < Game.entities.size(); i++) {
+            if (x == Terrain.positionBlock(Game.entities.get(i).getX()) && y == Terrain.positionBlock(Game.entities.get(i).getY())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

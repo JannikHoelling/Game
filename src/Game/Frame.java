@@ -13,6 +13,13 @@ import javax.swing.JPanel;
 
 import Game.Editor.*;
 import static Game.World.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
 
 public class Frame extends JFrame {
 
@@ -32,8 +39,9 @@ public class Frame extends JFrame {
         this.setSize(FRAME_X, FRAME_Y);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        //this.closeWindows();
+        this.setIcon();
         
+        //this.closeWindows();
         gamePanel.validate();
 
         FileHandler.createFolder(); //create save-Folder
@@ -58,6 +66,7 @@ public class Frame extends JFrame {
         }
         this.addComponentListener(new FrameListener());
         this.setListener();
+
         this.setVisible(true);
     }
 
@@ -126,5 +135,14 @@ public class Frame extends JFrame {
 
     public static void disableClickable() {
         enableClickable();
+    }
+    
+    private void setIcon() {
+        try {
+            this.setIconImage(ImageIO.read(new File("res\\icon.png")));
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

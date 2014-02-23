@@ -83,6 +83,7 @@ public class Terrain {
 
         int xPosition = (int) x;
         int yPosition = (int) y;
+        
         return new Dimension(xPosition, yPosition);
     }
 }

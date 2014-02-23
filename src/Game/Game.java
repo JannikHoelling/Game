@@ -76,7 +76,7 @@ public class Game implements Runnable {
             // move this loop
 
             Frame.gamePanel.requestFocusInWindow(); //focus on game panel
-            fileHandler.update(); //check keyinput in fileHandler
+            //fileHandler.update(); //check keyinput in fileHandler
 
             long now = System.nanoTime();
             long updateLength = now - lastLoopTime;

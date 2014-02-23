@@ -12,11 +12,11 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import Game.Game;
-import Game.Input;
 import Game.Enums.BlockType;
 import static Game.Game.*;
 import static Game.Map.Terrain.terrain;
 import static Game.World.*;
+
 
 public class FileHandler {
 
@@ -29,13 +29,7 @@ public class FileHandler {
     private boolean exit = false; //true if user wants to exit game (for saving game)
 
     public void update() {
-        //strg + s for saving
-        if (Input.keys[KeyEvent.VK_S] && Input.keys[KeyEvent.VK_CONTROL]) {
-            save();
-            Input.keys[KeyEvent.VK_S] = false;
-            Input.keys[KeyEvent.VK_CONTROL] = false;
-            resetFrameTime();
-        }
+
     }
 
     public void save() {

@@ -10,6 +10,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
@@ -51,6 +52,8 @@ public class MenuPanel extends JPanel implements ActionListener {
         tools();
         this.setSize(this.getWidth(), this.getHeight());
     }
+    
+    JFrame frame = new JFrame();
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -70,13 +73,25 @@ public class MenuPanel extends JPanel implements ActionListener {
             Frame.exit();
         }
         if (e.getSource() == settings) {
-            JOptionPane.showMessageDialog(null, "SETTINGS", "SETTINGS", JOptionPane.INFORMATION_MESSAGE);
+            frame.setSize(500, 500);
+            frame.setLocationRelativeTo(null);
+            frame.setIconImage(Icons.SETTINGS.getImage());
+            frame.setTitle("Settings");
+            frame.setVisible(true);
         }
         if (e.getSource() == faq) {
-            JOptionPane.showMessageDialog(null, "FAQ", "FAQ", JOptionPane.INFORMATION_MESSAGE);
+            frame.setSize(500, 500);
+            frame.setLocationRelativeTo(null);
+            frame.setIconImage(Icons.FAQ.getImage());
+            frame.setTitle("FAQ");
+            frame.setVisible(true);
         }
         if (e.getSource() == about) {
-            JOptionPane.showMessageDialog(null, "ABOUT", "ABOUT", JOptionPane.INFORMATION_MESSAGE);
+            frame.setSize(500, 500);
+            frame.setLocationRelativeTo(null);
+            frame.setIconImage(Icons.ABOUT.getImage());
+            frame.setTitle("About");
+            frame.setVisible(true);
         }
         if (e.getSource() == cmdSave) {
             fileHandler.save();
@@ -120,9 +135,9 @@ public class MenuPanel extends JPanel implements ActionListener {
         menubar.add(help);
 
         file.add(newFile);
+        file.add(load);
         file.add(save);
         file.add(saveAs);
-        file.add(load);
         file.addSeparator();
         file.add(exit);
 

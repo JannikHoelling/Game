@@ -29,7 +29,7 @@ public final class Teleporter extends RigidBody {
         super(x, y);
         image = Interactives.TELEPORT.getImage();
         this.teleporter = teleporter;
-        
+
         this.setSet();
 
         Game.teleporter.add(this);
@@ -52,6 +52,8 @@ public final class Teleporter extends RigidBody {
     public void onCollision() {
         Game.player.setX(teleporter.x + 64);
         Game.player.setY(teleporter.y);
+        Game.player.setDX(0);
+        Game.player.setDY(0);
     }
 
     public void setSet() {
@@ -61,11 +63,11 @@ public final class Teleporter extends RigidBody {
     public boolean getSet() {
         return set;
     }
-    
+
     public void setNumber(int number) {
         this.number = number;
     }
-    
+
     public int getNumber() {
         return this.number;
     }
