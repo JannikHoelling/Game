@@ -8,7 +8,6 @@ import java.awt.Graphics2D;
 import static Game.World.*;
 import java.awt.Font;
 import java.awt.RenderingHints;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -23,6 +22,7 @@ public class GamePanel extends JPanel {
 
     }
 
+    
     @Override
     public void paint(Graphics gOld) {
         Graphics2D g = (Graphics2D) gOld;

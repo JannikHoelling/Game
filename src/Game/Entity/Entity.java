@@ -3,11 +3,7 @@ package Game.Entity;
 import java.awt.Graphics2D;
 import Game.Game;
 import Game.Renderer;
-import static Game.World.HALF_FRAME_X;
-import static Game.World.HALF_FRAME_Y;
-import static Game.World.HALF_TILE;
-import static Game.World.TILE_SIZE;
-import Game.Map.Block;
+import static Game.World.*;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 

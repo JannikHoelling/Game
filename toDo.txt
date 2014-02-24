@@ -2,9 +2,10 @@ Grid
 save und map
 startbild, auswahl
 Fenster (Menuitems)
-Teleport:
-	teleport richtige Seite
 redo/undo funktion
+	=> undo: nach undo setzen und redo (zwei listen vermutlich)
+	=> redo
+player mitten
 
 
 Bilder

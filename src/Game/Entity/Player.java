@@ -6,10 +6,8 @@ import Game.Map.Terrain;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import static Game.World.*;
-import java.awt.image.BufferedImage;
 import Game.Enums.Players;
-import Game.Map.Block;
-import java.awt.Dimension;
+
 
 public class Player extends RigidBody {
 
@@ -18,7 +16,7 @@ public class Player extends RigidBody {
     private float dX;
     private float dY;
 
-    private Weapon weapon;
+    private final Weapon weapon;
     
     public Player(float x, float y) {
         super(x, y);
@@ -26,13 +24,14 @@ public class Player extends RigidBody {
         weapon = new Weapon();
     }
 
+    
     @Override
     public void render(Graphics2D g) {       
         g.drawImage(image, HALF_FRAME_X - HALF_TILE, HALF_FRAME_Y - HALF_TILE, TILE_SIZE, TILE_SIZE, null);
-        g.drawRect(HALF_FRAME_X - HALF_TILE, HALF_FRAME_Y - HALF_TILE, TILE_SIZE-1, TILE_SIZE-1);
-        
+        g.drawRect(HALF_FRAME_X - HALF_TILE, HALF_FRAME_Y - HALF_TILE, TILE_SIZE-1, TILE_SIZE-1);        
     }
 
+    
     @Override
     public void update(float delta) {
         if(Input.keys[KeyEvent.VK_A]){
@@ -91,7 +90,7 @@ public class Player extends RigidBody {
         }
 
         
-        if (Input.mouseClicked) {
+        if (Input.mouseClicked && Game.isRunning()) {
             //SpawnTools.spawnProjectile(x, y, Input.getMouseX(), Input.getMouseY(), 500f);
             weapon.shoot(x, y, Input.getMouseX(), Input.getMouseY());
         }

@@ -9,7 +9,7 @@ public class RigidBody extends Entity {
     
     public RigidBody(float x, float y) {
         super(x, y);
-        
+
         Game.rigidBodies.add(this);
     }
     

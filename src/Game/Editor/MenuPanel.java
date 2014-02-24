@@ -46,15 +46,16 @@ public class MenuPanel extends JPanel implements ActionListener {
     private final JButton cmdRedo = new JButton(Icons.REDO.getIcon());
     private final JButton cmdRun = new JButton(Icons.START.getIcon());
 
-    //private GamePanel panel = new GamePanel();
+    private final JFrame frame = new JFrame();
+    private static int step = 0;
+    
     public MenuPanel() {
         menu();
         tools();
         this.setSize(this.getWidth(), this.getHeight());
     }
-    
-    JFrame frame = new JFrame();
 
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == newFile) {
@@ -97,10 +98,16 @@ public class MenuPanel extends JPanel implements ActionListener {
             fileHandler.save();
         }
         if (e.getSource() == cmdUndo) {
-            JOptionPane.showMessageDialog(null, "UNDO", "UNDO", JOptionPane.INFORMATION_MESSAGE);
+            if (!Game.step.isEmpty() && (Game.step.size() - 1 >= (-step))) {
+                step--;
+                Game.step.get(Game.step.size() + step).set();
+            }
         }
         if (e.getSource() == cmdRedo) {
-            JOptionPane.showMessageDialog(null, "REDO", "REDO", JOptionPane.INFORMATION_MESSAGE);
+            if ((-step) >= 1) {
+                step++;
+                Game.step.get(Game.step.size() - 1 + step).set();
+            }
         }
         if (e.getSource() == cmdRun) {
             if (Game.getReady()) {
@@ -173,5 +180,9 @@ public class MenuPanel extends JPanel implements ActionListener {
             toolbar.getComponent(i).setEnabled(!toolbar.getComponent(i).isEnabled());
         }
         cmdRun.setEnabled(true);
+    }
+    
+    public static int getStep() {
+        return step;
     }
 }

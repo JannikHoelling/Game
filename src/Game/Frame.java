@@ -13,13 +13,11 @@ import javax.swing.JPanel;
 
 import Game.Editor.*;
 import static Game.World.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
 
 public class Frame extends JFrame {
 
@@ -32,7 +30,7 @@ public class Frame extends JFrame {
     public static GamePanel gamePanel = new GamePanel();
     public static EditorPanel editorPanel = new EditorPanel();
     
-    private final Input input = new Input();
+    public static Input input = new Input();
 
     public Frame(String args) {
         this.pack();
@@ -72,6 +70,7 @@ public class Frame extends JFrame {
 
     private void closeWindows() {
         addWindowListener(new WindowAdapter() {
+            
             @Override
             public void windowClosing(WindowEvent e) {
                 exit(); //ask for saving bevor closing
@@ -102,21 +101,21 @@ public class Frame extends JFrame {
     }
 
     private class FrameListener implements ComponentListener {
-
+        
         @Override
         public void componentResized(ComponentEvent ce) {
             FRAME_X = gamePanel.getWidth();
             FRAME_Y = gamePanel.getHeight();
         }
-
+        
         @Override
         public void componentMoved(ComponentEvent ce) {
         }
-
+      
         @Override
         public void componentShown(ComponentEvent ce) {
         }
-
+    
         @Override
         public void componentHidden(ComponentEvent ce) {
         }

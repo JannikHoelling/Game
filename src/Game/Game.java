@@ -1,6 +1,7 @@
 package Game;
 
 import Game.Editor.FileHandler;
+import Game.Editor.Step;
 import Game.Map.Terrain;
 import Game.Entity.*;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class Game implements Runnable {
     public static ArrayList<Entity> entities = new ArrayList<>();
     public static ArrayList<RigidBody> rigidBodies = new ArrayList<>();
     public static ArrayList<Teleporter> teleporter = new ArrayList<>();
+    public static ArrayList<Step> step = new ArrayList<>();
 
     public static Terrain terrain;
     public static Player player;
@@ -26,18 +28,11 @@ public class Game implements Runnable {
     private static boolean ready = true;
 
     private static boolean isRunning = false;
-    static Teleporter t1;
-    static Teleporter t2;
 
     public Game() {
         terrain = new Terrain();
         fileHandler = new FileHandler();
         player = new Player(0, 0);
-        //entities.add(player);
-
-        //t1 = new Teleporter(255, 255, null);
-        //t2 = new Teleporter(500, 255, t1);
-        //t1.setTarget(t2);
     }
 
     public void update(double delta) {
@@ -66,6 +61,7 @@ public class Game implements Runnable {
         time += delta;
     }
 
+    
     @Override
     public void run() {
         fileHandler.save();

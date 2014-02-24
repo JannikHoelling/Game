@@ -2,18 +2,11 @@ package Game.Editor;
 
 import Game.Enums.*;
 import Game.Input;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.LayoutManager;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -108,6 +101,7 @@ public class Tab  extends JPanel{
     
     
     private class Mouse extends MouseAdapter {
+        
         @Override
         public void mouseClicked(MouseEvent e)
         {

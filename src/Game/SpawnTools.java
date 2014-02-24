@@ -12,6 +12,7 @@ public class SpawnTools {
      * @param xTo x Position of the target
      * @param yTo y Position of the target
      * @param force speed with that the projectile is spawned in pixel/sec
+     * @param explode
      */
     
     public static void spawnProjectile(float xFrom, float yFrom, float xTo, float yTo, float force, boolean explode) {

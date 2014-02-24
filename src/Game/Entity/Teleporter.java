@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Game.Entity;
 
 import Game.Enums.Interactives;
@@ -12,13 +7,10 @@ import static Game.World.*;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-/**
- *
- * @author Jannik
- */
+
 public final class Teleporter extends RigidBody {
 
-    private final BufferedImage image;
+    private final BufferedImage imageTeleport;
     private Teleporter teleporter;
 
     private boolean set = true;
@@ -27,7 +19,7 @@ public final class Teleporter extends RigidBody {
 
     public Teleporter(float x, float y, Teleporter teleporter) {
         super(x, y);
-        image = Interactives.TELEPORT.getImage();
+        this.imageTeleport = Interactives.TELEPORT.getImage();
         this.teleporter = teleporter;
 
         this.setSet();
@@ -41,6 +33,7 @@ public final class Teleporter extends RigidBody {
         this.teleporter.setNumber(this.getNumber());
     }
 
+    
     @Override
     public void render(Graphics2D g) {
         intNum = new Integer(number);
@@ -48,6 +41,7 @@ public final class Teleporter extends RigidBody {
         g.drawString(intNum.toString(), (int) x + Renderer.offsetX(), (int) y + Renderer.offsetY());
     }
 
+    
     @Override
     public void onCollision() {
         Game.player.setX(teleporter.x + 64);
