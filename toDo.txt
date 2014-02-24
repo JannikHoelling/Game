@@ -6,6 +6,8 @@ redo/undo funktion => ausgrauen
 	=> undo: nach undo setzen und redo (zwei listen vermutlich)
 	=> redo
 player mitten
+platzieren: entity -> ersetzen
+scroll  in editor
 
 
 Bilder
