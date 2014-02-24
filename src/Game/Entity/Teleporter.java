@@ -10,7 +10,6 @@ import java.awt.image.BufferedImage;
 
 public final class Teleporter extends RigidBody {
 
-    private final BufferedImage imageTeleport;
     private Teleporter teleporter;
 
     private boolean set = true;
@@ -19,7 +18,7 @@ public final class Teleporter extends RigidBody {
 
     public Teleporter(float x, float y, Teleporter teleporter) {
         super(x, y);
-        this.imageTeleport = Interactives.TELEPORT.getImage();
+        this.image = Interactives.TELEPORT.getImage();
         this.teleporter = teleporter;
 
         this.setSet();

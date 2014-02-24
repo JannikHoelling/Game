@@ -138,32 +138,32 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
                                     }
                                     break;
                             }
-
-                            dimEntity = Terrain.positionInArray(Game.rigidBodies.get(Game.rigidBodies.size() - 1).getX(), Game.rigidBodies.get(Game.rigidBodies.size() - 1).getY());
-                            if (Terrain.terrain[dimEntity.width][dimEntity.height].blockType != BlockType.AIR) {
-                                if (Game.rigidBodies.size() == 1) {
-                                    if (dimEntity.width > dim.width) {
-                                        Game.rigidBodies.get(Game.rigidBodies.size() - 1).setX(Terrain.positionBlock(Game.rigidBodies.get(Game.rigidBodies.size() - 1).getX() - TILE_SIZE));
-                                    } else {
-                                        Game.rigidBodies.get(Game.rigidBodies.size() - 1).setY(Terrain.positionBlock(Game.rigidBodies.get(Game.rigidBodies.size() - 1).getY() - TILE_SIZE));
-                                    }
-                                } else {
-                                    if (Game.teleporter.size() > 0 && Game.rigidBodies.get(Game.rigidBodies.size() - 1).equals(Game.teleporter.get(Game.teleporter.size() - 1))) {
-                                        Game.teleporter.get(Game.teleporter.size() - 1).destroy();
-                                        Game.teleporter.remove(Game.teleporter.size() - 1);
-                                    }
-                                    Game.rigidBodies.get(Game.rigidBodies.size() - 1).destroy();
-                                    Game.rigidBodies.remove(Game.rigidBodies.size() - 1);
-                                }
-                            }
                             break;
                         case "DECORATIONS":
+                            new Deco(Terrain.positionBlock(dimMouse.width), Terrain.positionBlock(dimMouse.height), Decorations.valueOf(name).getImage());
                             break;
                         case "PLAYERS":
                             Game.player.setX(Terrain.positionBlock(dimMouse.width));
                             Game.player.setY(Terrain.positionBlock(dimMouse.height));
                             Game.player.setImage(Players.valueOf(name).getImage());
                             break;
+                    }
+                    dimEntity = Terrain.positionInArray(Game.entities.get(Game.entities.size() - 1).getX(), Game.entities.get(Game.entities.size() - 1).getY());
+                    if (Terrain.terrain[dimEntity.width][dimEntity.height].blockType != BlockType.AIR) {
+                        if (Game.entities.size() == 1) {
+                            if (dimEntity.width > dim.width) {
+                                Game.entities.get(Game.entities.size() - 1).setX(Terrain.positionBlock(Game.entities.get(Game.entities.size() - 1).getX() - TILE_SIZE));
+                            } else {
+                                Game.entities.get(Game.entities.size() - 1).setY(Terrain.positionBlock(Game.entities.get(Game.entities.size() - 1).getY() - TILE_SIZE));
+                            }
+                        } else {
+                            if (Game.teleporter.size() > 0 && Game.entities.get(Game.entities.size() - 1).equals(Game.teleporter.get(Game.teleporter.size() - 1))) {
+                                Game.teleporter.get(Game.teleporter.size() - 1).destroy();
+                                Game.teleporter.remove(Game.teleporter.size() - 1);
+                            }
+                            Game.entities.get(Game.entities.size() - 1).destroy();
+                            Game.entities.remove(Game.entities.size() - 1);
+                        }
                     }
                 }
             }

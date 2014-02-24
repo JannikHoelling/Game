@@ -2,7 +2,7 @@ Grid
 save und map
 startbild, auswahl
 Fenster (Menuitems)
-redo/undo funktion
+redo/undo funktion => ausgrauen
 	=> undo: nach undo setzen und redo (zwei listen vermutlich)
 	=> redo
 player mitten

@@ -20,8 +20,8 @@ public class Player extends RigidBody {
     
     public Player(float x, float y) {
         super(x, y);
-        image = Players.BLUE.getImage();
-        weapon = new Weapon();
+        this.image = Players.BLUE.getImage();
+        this.weapon = new Weapon();
     }
 
     
