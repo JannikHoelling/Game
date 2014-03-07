@@ -1,5 +1,6 @@
 package Game.Entity;
 
+import Game.Enums.Interactives;
 import Game.Renderer;
 import static Game.World.*;
 import java.awt.Graphics2D;

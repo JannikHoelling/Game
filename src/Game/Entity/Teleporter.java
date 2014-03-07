@@ -5,7 +5,6 @@ import Game.Game;
 import Game.Renderer;
 import static Game.World.*;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 
 
 public final class Teleporter extends RigidBody {
@@ -15,6 +14,9 @@ public final class Teleporter extends RigidBody {
     private boolean set = true;
     private int number;
     private Integer intNum;
+    
+    public long nextTeleport;
+    private long coolDown = 2000;
 
     public Teleporter(float x, float y, Teleporter teleporter) {
         super(x, y);
@@ -43,10 +45,15 @@ public final class Teleporter extends RigidBody {
     
     @Override
     public void onCollision() {
-        Game.player.setX(teleporter.x + 64);
-        Game.player.setY(teleporter.y);
-        Game.player.setDX(0);
-        Game.player.setDY(0);
+        if(nextTeleport < System.currentTimeMillis()) {
+            Game.player.setX(teleporter.x + HALF_TILE);
+            Game.player.setY(teleporter.y + HALF_TILE);
+            Game.player.setDX(0);
+            Game.player.setDY(0);
+            
+            teleporter.nextTeleport = System.currentTimeMillis() + coolDown;
+            nextTeleport = System.currentTimeMillis() + coolDown;
+        }
     }
 
     public void setSet() {

@@ -1,7 +1,7 @@
 package Game.Editor;
 
 import Game.*;
-import static Game.Game.entities;
+import static Game.Game.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -35,8 +35,8 @@ public class GamePanel extends JPanel {
         g.drawOval(Input.getMouseX() + Renderer.offsetX() - 10, Input.getMouseY() + Renderer.offsetY() - 10, 20, 20);
 
         Game.terrain.render(g);
-
-        for (int i = 0; i < entities.size(); i++) {
+        
+        for (int i = entities.size()-1; i >= 0 ; i--) {
             entities.get(i).render(g);
         }
 
@@ -46,5 +46,11 @@ public class GamePanel extends JPanel {
         g.drawString("Camera: " + Camera.x + "|" + Camera.y, 0, 18 * 3);
         g.drawString("Mouse: " + Input.getMouseX() + "|" + Input.getMouseY(), 0, 18 * 4);
 
+    }
+    
+    public static void newGame() {
+        entities.clear();
+        game = new Game();
+        Frame.gamePanel.repaint();
     }
 }

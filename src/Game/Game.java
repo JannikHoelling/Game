@@ -1,6 +1,7 @@
 package Game;
 
 import Game.Editor.FileHandler;
+import Game.Editor.GamePanel;
 import Game.Editor.Step;
 import Game.Map.Terrain;
 import Game.Entity.*;
@@ -32,7 +33,7 @@ public class Game implements Runnable {
     public Game() {
         terrain = new Terrain();
         fileHandler = new FileHandler();
-        player = new Player(0, 0);
+        player = new Player(0 , 0);
     }
 
     public void update(double delta) {
@@ -41,7 +42,7 @@ public class Game implements Runnable {
 
             Entity e = entities.get(i);
 
-            if (!e.isAlive()) {
+            if (e.isAlive()) {
                 e.update((float) delta);
             } else {
                 e.onDestroy();

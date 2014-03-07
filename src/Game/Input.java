@@ -23,9 +23,10 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
     private static String name = "";
     private static String type = "";
 
-    Dimension dim = new Dimension();
-    Dimension dimMouse = new Dimension();
-    Dimension dimEntity = new Dimension();
+    private Dimension dim = new Dimension();
+    private Dimension dimMouse = new Dimension();
+    private Dimension dimEntity = new Dimension();
+    private boolean placed = false;
 
     public static void setIconName(String name) {
         String[] splitting;
@@ -103,7 +104,6 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
         if (type != null && !type.equals("") && name != null && !name.equals("")) {
             dimMouse = new Dimension(getMouseX(), getMouseY());
             dim = Terrain.positionInArray(dimMouse.width, dimMouse.height);
-
             if (dim.width < WORLD_X - 1 && dim.width > 0 && dim.height < WORLD_Y - 1 && dim.height > 0) {
                 if (Terrain.terrain[dim.width][dim.height].blockType == BlockType.AIR && !isEntityOnPosition(Terrain.positionBlock(dimMouse.width), Terrain.positionBlock(dimMouse.height))) {
                     switch (type) {
@@ -167,8 +167,13 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
                     }
                 }
             }
+            
+            if(placed) {
+                Frame.menuPanel.enableUndo();
+            }
+            
             GamePanel.game.update(0);
-            Frame.gamePanel.repaint();
+            Frame.gamePanel.repaint();    
         }
 
     }
@@ -180,6 +185,10 @@ public class Input implements KeyListener, MouseMotionListener, MouseListener {
             }
         }
         return false;
+    }
+
+    public void setPlaced() {
+        placed = true;
     }
 
 }

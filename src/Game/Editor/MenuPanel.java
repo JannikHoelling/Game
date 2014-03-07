@@ -45,71 +45,70 @@ public class MenuPanel extends JPanel implements ActionListener {
     private final JButton cmdUndo = new JButton(Icons.UNDO.getIcon());
     private final JButton cmdRedo = new JButton(Icons.REDO.getIcon());
     private final JButton cmdRun = new JButton(Icons.START.getIcon());
+    private final JButton cmdReset = new JButton(Icons.RESET.getIcon());
 
     private final JFrame frame = new JFrame();
     private static int step = 0;
-    
+
     public MenuPanel() {
         menu();
         tools();
         this.setSize(this.getWidth(), this.getHeight());
     }
 
-    
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == newFile) {
             fileHandler.newFile();
-        }
-        if (e.getSource() == save) {
+        } else if (e.getSource() == save) {
             fileHandler.save();
-        }
-        if (e.getSource() == saveAs) {
+        } else if (e.getSource() == saveAs) {
             fileHandler.saveAs();
-        }
-        if (e.getSource() == load) {
+        } else if (e.getSource() == load) {
             fileHandler.load();
-        }
-        if (e.getSource() == exit) {
+        } else if (e.getSource() == exit) {
             Frame.exit();
-        }
-        if (e.getSource() == settings) {
+        } else if (e.getSource() == settings) {
             frame.setSize(500, 500);
             frame.setLocationRelativeTo(null);
             frame.setIconImage(Icons.SETTINGS.getImage());
             frame.setTitle("Settings");
             frame.setVisible(true);
-        }
-        if (e.getSource() == faq) {
+        } else if (e.getSource() == faq) {
             frame.setSize(500, 500);
             frame.setLocationRelativeTo(null);
             frame.setIconImage(Icons.FAQ.getImage());
             frame.setTitle("FAQ");
             frame.setVisible(true);
-        }
-        if (e.getSource() == about) {
+        } else if (e.getSource() == about) {
             frame.setSize(500, 500);
             frame.setLocationRelativeTo(null);
             frame.setIconImage(Icons.ABOUT.getImage());
             frame.setTitle("About");
             frame.setVisible(true);
-        }
-        if (e.getSource() == cmdSave) {
+        } else if (e.getSource() == cmdSave) {
             fileHandler.save();
-        }
-        if (e.getSource() == cmdUndo) {
+        } else if (e.getSource() == cmdUndo) {
+            cmdRedo.setEnabled(true);
             if (!Game.step.isEmpty() && (Game.step.size() - 1 >= (-step))) {
                 step--;
                 Game.step.get(Game.step.size() + step).set();
+
+                if (Game.step.size() == (-step)) {
+                    cmdUndo.setEnabled(false);
+                }
             }
-        }
-        if (e.getSource() == cmdRedo) {
+        } else if (e.getSource() == cmdRedo) {
+            cmdUndo.setEnabled(true);
             if ((-step) >= 1) {
                 step++;
                 Game.step.get(Game.step.size() - 1 + step).set();
+
+                if ((-step) == 0) {
+                    cmdRedo.setEnabled(false);
+                }
             }
-        }
-        if (e.getSource() == cmdRun) {
+        } else if (e.getSource() == cmdRun) {
             if (Game.getReady()) {
                 if (cmdRun.getIcon() == Icons.START.getIcon()) {
                     GamePanel.game.start();
@@ -122,6 +121,12 @@ public class MenuPanel extends JPanel implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(null, "Nicht alles ist gesetzt!", "WARNING", JOptionPane.WARNING_MESSAGE);
             }
+        } else if (e.getSource() == cmdReset) {
+            //Frame.gamePanel.removeAll();
+            //GamePanel.newGame();
+            //Frame.gamePanel.repaint();
+            GamePanel.newGame();
+            Frame.gamePanel.repaint();
         }
     }
 
@@ -162,11 +167,16 @@ public class MenuPanel extends JPanel implements ActionListener {
         cmdUndo.addActionListener(this);
         cmdRedo.addActionListener(this);
         cmdRun.addActionListener(this);
+        cmdReset.addActionListener(this);
 
         toolbar.add(cmdSave);
         toolbar.add(cmdUndo);
         toolbar.add(cmdRedo);
         toolbar.add(cmdRun);
+        toolbar.add(cmdReset);
+
+        cmdUndo.setEnabled(false);
+        cmdRedo.setEnabled(false);
 
         toolbar.setBorder(new EtchedBorder());
         toolbar.setAlignmentX(0);
@@ -181,7 +191,11 @@ public class MenuPanel extends JPanel implements ActionListener {
         }
         cmdRun.setEnabled(true);
     }
-    
+
+    public void enableUndo() {
+        this.cmdUndo.setEnabled(true);
+    }
+
     public static int getStep() {
         return step;
     }

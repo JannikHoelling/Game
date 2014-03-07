@@ -8,7 +8,7 @@ redo/undo funktion => ausgrauen
 player mitten
 platzieren: entity -> ersetzen
 scroll  in editor
-
+teleport: richtiges setzen
 
 Bilder
 	

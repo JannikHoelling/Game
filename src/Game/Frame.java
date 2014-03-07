@@ -24,7 +24,6 @@ public class Frame extends JFrame {
     public static MenuPanel menuPanel = new MenuPanel();
 
     private final JPanel panel = new JPanel(); //panel for the game (position)
-    private final JPanel edPanel = new JPanel(); //panel for the game (position)
     private final GridLayout layout = new GridLayout(0, 5, 1, 1);
 
     public static GamePanel gamePanel = new GamePanel();
@@ -143,5 +142,9 @@ public class Frame extends JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public static void newGame() {
+        gamePanel = new GamePanel();
     }
 }

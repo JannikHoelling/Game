@@ -5,7 +5,7 @@ import Game.SpawnTools;
 
 public class Weapon {
     
-    public float fireRate = 15;
+    public float fireRate = 30;
     
     private long nextShoot = 0;
     

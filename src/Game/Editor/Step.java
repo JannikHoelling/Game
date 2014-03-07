@@ -17,6 +17,8 @@ public class Step {
         this.type1 = type1;
         this.type2 = replaceType;
         this.en1 = replaceEntity;
+        
+        Frame.input.setPlaced();
     }
 
     public void set() {

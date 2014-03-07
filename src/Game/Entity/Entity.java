@@ -12,7 +12,7 @@ public class Entity {
     protected float x;
     protected float y;
     
-    private boolean alive = false;
+    private boolean alive = true;
     protected BufferedImage image;
 
     public Entity(float x, float y) {
@@ -52,7 +52,7 @@ public class Entity {
     }
 
     public void destroy() {
-        alive = true;
+        alive = false;
     }
     
     public void onDestroy() {

@@ -27,8 +27,11 @@ public class Player extends RigidBody {
     
     @Override
     public void render(Graphics2D g) {       
-        g.drawImage(image, HALF_FRAME_X - HALF_TILE, HALF_FRAME_Y - HALF_TILE, TILE_SIZE, TILE_SIZE, null);
-        g.drawRect(HALF_FRAME_X - HALF_TILE, HALF_FRAME_Y - HALF_TILE, TILE_SIZE-1, TILE_SIZE-1);        
+        //g.drawImage(image, HALF_FRAME_X - HALF_TILE, HALF_FRAME_Y - HALF_TILE, TILE_SIZE, TILE_SIZE, null);
+        //g.drawRect(HALF_FRAME_X - HALF_TILE, HALF_FRAME_Y - HALF_TILE, TILE_SIZE-1, TILE_SIZE-1);  
+        
+        g.drawImage(image, (int) x + Renderer.offsetX() - HALF_TILE, (int) y + Renderer.offsetY() - HALF_TILE, TILE_SIZE, TILE_SIZE, null);
+        g.drawRect((int) x + Renderer.offsetX() - HALF_TILE, (int) y + Renderer.offsetY() - HALF_TILE, TILE_SIZE-1, TILE_SIZE-1);   
     }
 
     
