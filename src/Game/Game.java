@@ -37,7 +37,7 @@ public class Game implements Runnable {
     }
 
     public void update(double delta) {
-        // Loop through all entities, update them or remove them if they are marked to be deleted
+        // Loop through all entities, update them or remove them if they are marked to be deleted//
         for (int i = 0; i < entities.size(); i++) {
 
             Entity e = entities.get(i);
