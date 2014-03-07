@@ -1,8 +1,13 @@
-*.class
+project-root-directory/
++ save/
 
-# Package Files #
-*.war
-*.ear
-
-build
-/dist/
++ build/
++ dist/
++ nbproject/
+  build-impl.xml
+  + private/
+  + project.properties
+  + project.xml
++ src/
++ test/
++ build.xml
